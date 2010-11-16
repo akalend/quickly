@@ -1,5 +1,8 @@
 <?php
-
+/*
+* this script for patching local.nginx.conf information 
+* if You use the Apache 
+*/
 if ( strncmp($_SERVER["SERVER_SOFTWARE"], "Apache", 6 ) != 0)
 	die("Run for Apache");
 
