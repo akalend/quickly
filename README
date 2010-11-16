@@ -1,0 +1,114 @@
+REQURIMENTS
+
+PHP 5.2.0 and more, nginx/php-fpm, memcache, blitz,  MySQL 5.1.
+
+
+DESCRIPTION
+
+1) use MVC paradigma: Database communicate with class Model, the query is dynamic, building from  blitz template engine.
+
+2)  the view produce by View class. The template engine is blitz http://alexeyrybak.com/blitz/blitz_en.html.
+
+3) The part of controller function make nginx, see example config. You must include the local.nginx.conf to nginx.conf.
+
+4) the Profile data stored JSON format, the structure of data writed in config, look dir conf
+
+6) for search is recomendation to use search engine sphinx http://sphinxsearch.com/ 
+
+7) You could be like to use MongoDb for your data storage.
+
+INSTALLATION
+
+1) create dir 
+mkdir quickly
+cd quickly
+
+2) get source
+git init
+git checkout http://github.com/akalend/quickly
+
+3) restore db from db.sql
+mysql mydbname -p -u username < db.sql
+
+4) edit conf/pp.conf.php
+set username, password and dbname
+
+5) edit nginx.conf, insert into your virtualhost description the include operator,
+see nginx.conf.default:
+include fullpath/to/quickly/local.nginx.conf;
+
+6) start the memcache, php-fpm, nginx
+You can to use the tools/start.sh script
+
+
+The package:
+
+-rw-r--r--   1 akalend  staff    719  autoloader.php	- autoupload script
+-rw-r--r--   1 akalend  staff    375  run_app.php		- init core script
+
+drwxr-xr-x  4 akalend  staff    136  conf			- dir for configuration files
+-rw-r--r--  1 akalend  staff   220  app.conf.php	- app config file
+-rw-rw-rw-@ 1 akalend  staff  2743  local.nginx.conf - the location router nginx conf
+-rw-r--r--  1 akalend  staff   391  profile.conf.php - user profile config file
+
+drwxr-xr-x   7 akalend  staff    238  lib 			- core lib 
+drwxr-xr-x  12 akalend  staff    408  page			- server pages
+drwxr-xr-x   7 akalend  staff    238  static		- static content dir
+drwxr-xr-x  10 akalend  staff    340  template		- template dir
+
+drwxr-xr-x   7 akalend  staff    238  tools			- any and debug scripts
+-rwxrwxrwx@  1 akalend  staff    149  start.sh 		- example start script
+-rw-r--r--   1 akalend  staff  14178  tools/db.sql	- example dump
+-rw-r--r--@  1 akalend  staff   1405  tools/nginx.conf.default 	- example core nginx conf
+
+
+PERFORMANCE
+
+testing on notebook: Intel Core 2 Duo, 2.33 GHz, 2-nucleas, mem 2 Gb MacOs 
+
+index page
+Concurrency Level:      5
+Time taken for tests:   0.582 seconds
+Complete requests:      500
+Failed requests:        0
+Write errors:           0
+Requests per second:    859.38 [#/sec] (mean)
+Time per request:       5.818 [ms] (mean)
+Time per request:       1.164 [ms] (mean, across all concurrent requests)
+
+profile page:
+Document Path:          /user/2
+Document Length:        659 bytes
+
+Concurrency Level:      5
+Time taken for tests:   0.537 seconds
+Complete requests:      500
+Failed requests:        0
+Write errors:           0
+Requests per second:    931.42 [#/sec] (mean)
+Time per request:       5.368 [ms] (mean)
+Time per request:       1.074 [ms] (mean, across all concurrent requests)
+
+other page:
+Document Path:          /user/edit/2
+Concurrency Level:      5
+Time taken for tests:   2.560 seconds
+Complete requests:      500
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      500
+Requests per second:    195.30 [#/sec] (mean)
+Time per request:       25.601 [ms] (mean)
+Time per request:       5.120 [ms] (mean, across all concurrent requests)
+
+
+time of worked is:  microtime(finish) - microtime(start) :
+produce time=0.011475 in sec 
+SQL: SELECT user_id,name FROM userProfile WHERE reiting > 0 ORDER BY reiting
+time=0.000749 sec
+
+profile page:
+produce time=0.027205 in sec 
+include SQL: SELECT user_id,name, last_name, nick, birthdate , data, is_avatar FROM userProfile WHERE user_id = 2
+time=0.000542 sec
+

@@ -1,0 +1,28 @@
+#!/Users/akalend/bin/php
+<?
+//#!/usr/local/bin/php
+//phpinfo();
+
+include ('inc.php');
+
+if ($argc <2) {
+	echo "usage:\n\t";
+	echo "php run_script.php <scriptName> [--parm=value] ...\n\n";
+	die();
+}
+
+$args=array();
+if ($argc >2) {
+	for( $i=2; $i < $argc; $i++ ) {
+//		echo $argv[$i]."\n";
+		if (preg_match( "@--(\w+)=?([\w,]+)?@", $argv[$i], $arr )) {			
+			$args[$arr[1]] = isset($arr[2]) ? $arr[2] : null;
+		}		
+	}			
+}
+
+$app = new Application( $argv[1], 'script');
+
+$app->run( $args );
+
+?>
