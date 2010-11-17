@@ -1,17 +1,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Welcome to Govnokod</title>
+<title>Welcome to Quckly project</title>
 </head>
 <body>
-<h5>Wellcome to Govnokod (main)</h5>
+<h5>Wellcome to Quckly project</h5>
 <table width="940px" border="1">
 	<tr style="height: 40px;">
-		<td colspan="3">������� ������<br>
-			<div style="float: left; height: 40px; width: 200 px;"><a href="/catalog">�������</a></div>
-			<div style="float: left; height: 40px; width: 200 px;"><a href="/brands">������</a></div>
-			<div style="float: left; height: 40px; width: 200 px;">���������</div>
-			<div style="float: left; height: 40px; width: 200 px;">�������� ����������</div>
+		<td colspan="3">Some Header<br>
+			<div style="float: left; height: 40px; width: 200 px;"><a href="/catalog">catalog</a></div>
+			<div style="float: left; height: 40px; width: 200 px;"><a href="/brands">no follow</a></div>
+			<div style="float: left; height: 40px; width: 200 px;">xxx</div>
+			<div style="float: left; height: 40px; width: 200 px;">yyy</div>
 		</td>
 	</tr>
 	<tr style="height: 300px;">

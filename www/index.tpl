@@ -1,14 +1,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Welcome to Govnokod</title>
+<title>Welcome to Quckly project</title>
 <script>
 	<!--# include  virtual="$js" -->
 </script>
 
 </head>
 <body>
-<h5><a href='/'>Wellcome to Govnokod</a> (main)</h5>
+<h5><a href='/'>Wellcome to Quckly project</a> (main)</h5>
 <table width="940px" border="1">
 	<tr style="height: 300px;">
 		<td valign="top" style="width: 240px;">left banner<br>

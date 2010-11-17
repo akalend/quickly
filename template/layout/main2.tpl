@@ -15,7 +15,7 @@
 
 </head>
 <body bgcolor="white" text="black">
-<center><h1><a href="/">Welcome to Govnokod! </a> layout 2</h1></center>
+<center><h1><a href="/">Welcome to Quckly project! </a> layout 2</h1></center>
 
 {{BEGIN login}}{{login}}{{END}}
 
