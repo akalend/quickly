@@ -39,7 +39,8 @@ class ApplicationSsi {
 	}
 	
 	public function run( $args=null ) {
-		
+	    
+		register_shutdown_function('saveClassCache');
 		$this->page->init($args);
 		$this->page->run();
 

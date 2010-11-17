@@ -31,7 +31,6 @@ class Mc {
 	 */
 	public static function getInstance( array $config){
 		if ( isset(self::$mc) ) return self::$mc;
-		
 		self::$mc = new Memcache();
 		self::$mc->connect( $config['host'],$config['port'] );		
 		return self::$mc;

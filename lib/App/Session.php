@@ -19,7 +19,7 @@ class Session {
 	 *
 	 */
 	function __construct( ){
-		session_start();
+		//session_start();
 		$this->Data = $_SESSION;
 		
 	}
