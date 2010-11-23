@@ -1,7 +1,6 @@
 <?php
 require_once( 'autoloader.php' );
 require_once('lib/Block/Block.php' );
-require_once('lib/App/Application.php' );
 require_once('lib/App/Request.php' );
 require_once('lib/App/Session.php' );
 
@@ -25,5 +24,8 @@ if (file_exists( APP_PATH.'/tmp/classes.cache.php')) {
 } else {
      $classesCache = array();
 }
-global $classesCache;     
+
+global $classesCache,$isSaveClassCache;     
+$isSaveClassCache = false;
+
      

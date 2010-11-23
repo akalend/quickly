@@ -7,7 +7,7 @@
 {{BEGIN row2}}
 <a href="{{URL}}/{{ if($h2_id ,'goods', 'catalog')}}/{{innername}}" >{{fullname}}</a><br>
 {{END}}
-{{IF item}}<h1>Каталог</h1>{{END}}
+{{IF item}}<h1>РљР°С‚Р°Р»РѕРі</h1>{{END}}
 {{BEGIN item}}
 <div style="padding-top:10px;">
 <a href="{{URL}}/catalog/{{root.innername}}" >{{root.fullname}}</a><br>

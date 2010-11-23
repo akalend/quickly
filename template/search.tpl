@@ -1,13 +1,13 @@
-template=goods.tpl
+template=search.tpl
 {{BEGIN page}}
 <div style="border: doted 1 black">
 
 <h1>{{title}}</h1>
 <br/>
 
+<div style="color: blue;">всего найдено {{founded}}</div>
 {{BEGIN goods}}
-<div style="padding-top:3px;">{{name}}</div>	
-</div>
+<div style="padding-top:3px;">{{name}}  <span style="color: blue; padding-right: 10px;">{{class}}</span> </div>	
 {{END}}
 
 {{BEGIN pages}}

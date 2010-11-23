@@ -11,19 +11,63 @@ class GoodModel extends DbModel {
 									FROM spec where class_id={{class_id}}";
 
 	const SQL_SELECT_BY_INNERNAME = "SELECT spec_name as name,spec_id as id 
+									FROM spec where class_innername='{{s(innername)}}'
+									LIMIT {{top}},{{limit}}";
+
+	const SQL_SELECT_COUNT_BY_INNERNAME = "SELECT count(spec_id) as count
 									FROM spec where class_innername='{{s(innername)}}'";
+	
+	
+	const SQL_SELECT_BY_IDS = "SELECT spec_name as name,spec_id as id, class_innername as class  
+									FROM spec 
+									WHERE spec_id IN ({{ids}})";
 	
 	public function getByClassIdOld($id) {
 		return $this->exec( self::SQL_SELECT_BY_CLASSID , array( 'class_id'=> $id ) );
 	}
 	
-	public function getByCategoryName($innername) {
+	public function getByIds($ids) {
+		return $this->exec( self::SQL_SELECT_BY_IDS , array( 'ids'=> $ids ) );
+	}
+
+	private $pages, $pageNum, $recCount;
+	
+	public function getByCategoryName($innername, $pageNum = 1, $pageSize = 25) {
+	    
+	    
+	    $res = $this->exec( self::SQL_SELECT_COUNT_BY_INNERNAME  , array( 'innername'=> $innername ) );
+	    $count = (int)$res[0]['count'];
+	    
+	    $this->recCount = $count;
+	    
+	    if(!$count)
+	       return false;
+	    $this->pageNum = (int)$pageNum;
+	    if (!$this->pageNum )   
+	       $this->pageNum  = 1;
+
+	    $pageCount = ceil($count / $pageSize);
+	    if ($this->pageNum  > $pageCount-1 )
+	       $this->pageNum  = $pageCount;
+	       
+	    $top = ($this->pageNum - 1) * $pageSize;
+	    //echo "top=$top limit=$pageSize<br>";
+	    //return false;      
 		$spec = array();
-		$res = $this->exec( self::SQL_SELECT_BY_INNERNAME  , array( 'innername'=> $innername ) );
+		$res = $this->exec( self::SQL_SELECT_BY_INNERNAME  , 
+		                  array('innername'=> $innername,
+		                        'limit' => $pageSize,
+		                        'top' => $top ));
 		if (!$res)
 			return false;
 		
+		$this->pages = $pageCount;
 			return $res;		
+	}
+	
+	public function makePages($url) {	    
+	   $PB = new PagerBuilder($this->recCount, $this->pageNum); 
+	   return $PB->build($url,NULL, false); 
 	}
 	
 	public function getByClassId($id) {

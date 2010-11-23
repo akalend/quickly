@@ -54,6 +54,7 @@ abstract class DbModel {
 	private $tpl = null;
 	private $rows =0;
 	private $res;
+	private $encoding = false;
 	
 	/**
 	 * ����������� ������
@@ -63,6 +64,10 @@ abstract class DbModel {
 		$this->conf = $conf->get('db');
 	}
 		
+	public function setEncoding($encoding) {
+		$this->encoding = $encoding;
+	}
+	
 	/**
 	 * protected function, check argument for not null
 	 * using for check mysql paramers
@@ -117,6 +122,7 @@ abstract class DbModel {
 			$this->isntCall=false;
 			$this->db = new mysqli( $this->conf['host'], $this->conf['user'],$this->conf['password'], $this->conf['dbname']);
 			$this->db->query("SET NAMES 'cp1251'");
+			$this->encoding = 'UTF-8';
 			if (mysqli_connect_error() ){
 				throw new Exception('Conection error '.mysqli_connect_error());
 			}
@@ -141,6 +147,8 @@ abstract class DbModel {
 			
 			$sql = $this->tpl->parse($data);
 			unset($this->tpl);
+//			var_dump($data);
+//			echo "<font color=blue>$sql</font><br>";
 
 			$time_start = microtime();
 			$res = $this->db->query( $sql );
@@ -165,8 +173,15 @@ abstract class DbModel {
 			if (!is_object($res)) return true;
 
 			while ($row = $res->fetch_assoc()) {
-     		  $result[]=$row;     		  
-    		}
+     		    if ($this->encoding) {
+     		         foreach ( $row as $key => $value) {     		             
+     		             if($value)
+     		                $row[$key] = iconv('CP1251',$this->encoding,$value);
+     		         }       
+			    }  
+			    $result[]=$row;     		  
+			}
+    		
     		return $result;
 	}
 

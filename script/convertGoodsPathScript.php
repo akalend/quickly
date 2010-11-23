@@ -33,20 +33,48 @@ class ConvertGoodsPathScript extends baseScript {
 		
 	}
 	
+	private $spec = array();
+	private $classes = array();
+	
 	function create() {
-		$sql = "SELECT class_id, class_innername FROM classes;";	
+        $this->getClasses();
+        
+		$sql = "SELECT class_id , spec_id as id FROM spec";	
 		///?			spec_innername,,	
-		$this->db = new DbConvert();
 		$db = new DbConvert();
 		$db->query( $sql );
 		while ( ($row = $db->iterate()) != null ) {			
-			$this->updateGoods($row);
-		}
+//			var_dump($row);
+		    $this->updateGoods($row);
+		}		
+	}
+
+    private function getClasses() {
+		$sql = "SELECT rubric_id, class_id as id FROM classes;";	
+		///?			spec_innername,,	
+		$db = new DbConvert();
+		$db->query( $sql );
+		while ( ($row = $db->iterate()) != null ) {			
+			$this->classes[(int)$row[id]] = $row[rubric_id];
+		}		
+	}
 		
+	private function getSpec() {
+		$sql = "SELECT spec_id as id, class_id  FROM spec;";	
+		///?			spec_innername,,	
+		$db = new DbConvert();
+		$db->query( $sql );
+		while ( ($row = $db->iterate()) != null ) {			
+			$this->spec[(int)$row[id]] = $row[class_id];
+		}		
 	}
 	
+	
+	
 	private function updateGoods($row){
-		$sql = "UPDATE spec SET class_innername='{$row[class_innername]}' WHERE class_id=$row[class_id];\n";
+		$rubric_id = $this->classes[$row[class_id]];
+		if (!$rubric_id) return;
+	    $sql = "UPDATE spec SET rubric_id=$rubric_id WHERE spec_id=$row[id];\n";
 		echo $sql;
 		//$this->db->query( $sql );
 	}

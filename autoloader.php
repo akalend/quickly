@@ -11,8 +11,6 @@ function __autoload( $name ){
 	//echo $name."<br>";
 	global $classesCache;  
 	global $isSaveClassCache;
-	
-	$isSaveClassCache = false;
 
 	if (array_key_exists($name, $classesCache)) {
 	    require_once($classesCache[$name]);
@@ -36,8 +34,9 @@ function __autoload( $name ){
 		    $path = "lib/App/$name.php";			
 		}
 	}
-		
+//	echo "cache[$name]=$path<br>";	
 	$isSaveClassCache = true;
+	//var_dump( $isSaveClassCache);
 	$classesCache[$name] = $path;
 	require_once($path);	
 }

@@ -11,7 +11,7 @@ class CategoryModel extends DbModel {
 								FROM category c
 								WHERE is_hidden=0 AND innername = '{{s(name)}}'";
 					
-	const SQL_SELECT_BY_ID = "SELECT full_name
+	const SQL_SELECT_BY_ID = "SELECT fullname,innername
 								FROM category c
 								WHERE id = {{id}}";
 
@@ -26,6 +26,10 @@ class CategoryModel extends DbModel {
 	const SQL_SELECT_CHILD_CATEGORY = "SELECT id, fullname, innername, parent_title as title  
 									FROM category c 
 									WHERE parent_name = '{{s(name)}}'";
+	const SQL_SELECT_BY_IDS = "SELECT fullname,innername
+								FROM category c
+								WHERE id = in {{ids}}";
+
 	protected $title;
 	protected $parent_id;
 	
@@ -42,10 +46,21 @@ class CategoryModel extends DbModel {
 	public function getTitle() { 		
 		return $this->title;
 	}
+	
 	public function getParentId() { 		
 		return $this->parent_id;
 	}
 
+	public function getByIds(Array $ids) {
+	    if (!count($ids)) 
+	       return NULL;
+	    if (count($ids) == 1)
+	       return $this->exec(self::SQL_SELECT_BY_ID, array('id'=>$ids));		
+	       
+	    return  $this->exec(self::SQL_SELECT_BY_IDS, array('ids'=>$ids));		
+	}
+
+	
 	public function getChildCategory($name) {
 		$res = $this->exec(self::SQL_SELECT_CHILD_CATEGORY, array('name'=>$name));		
 		if (isset($res[0])) 
