@@ -9,4 +9,5 @@ $classesCache = array (
   'PagerBuilder' => 'lib/Pager/PagerBuilder.php',
   'DbConvert' => 'lib/Db/DbConvert.php',
   'Application' => 'lib/App/Application.php',
+  'Mc' => 'lib/App/Mc.php',
 );

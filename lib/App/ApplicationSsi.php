@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ApplicationSsi {
 	
@@ -17,6 +17,7 @@ class ApplicationSsi {
 		$this->beginsTime = time();
 		$this->pageName =  $name;
 		$this->mode = $mode;
+		
 		include(APP_PATH.'/lib/App/Config.php' );
 		// include(APP_PATH.'/script/baseScript.php');
 

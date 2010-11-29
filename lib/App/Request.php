@@ -1,12 +1,12 @@
 <?
 /**
- * класс обертка POST
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ POST
  *
  * @author akalend
  * @package quickly
  */
 /**
- * класс обертка входных даных POST
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ POST
  *
  */
 class Request {
@@ -16,7 +16,7 @@ class Request {
 	private $files;
 	
 	/**
-	 * конструктор класса
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	function __construct( ){
@@ -28,9 +28,9 @@ class Request {
 	/**
 	 * Enter description here...
 	 *
-	 * @param  string $name - имя переменной
-	 * @return bool если переменная  существует - true 
-	 *              или если есть POST запрос 
+	 * @param  string $name - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @return bool пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - true 
+	 *              пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ POST пїЅпїЅпїЅпїЅпїЅпїЅ 
 	 */
 	public function hasVar( $name = null) {
 		if (is_null( $name ))
@@ -39,47 +39,58 @@ class Request {
 	}
 	
 	/**
-	 * возвращает значение переменной
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 * @param string $name
-	 * @return mixed - значение переменной
+	 * @return mixed - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function get( $name ) {
 		return array_key_exists( $name, $this->Data) ? $this->Data[$name] : null;
 	}
 	
 	/**
-	 * возвращает значение серверной переменной
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 * @param string $name
-	 * @return mixed - значение переменной
+	 * @return mixed - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function getServer( $name ) {
 		return array_key_exists( $name, $this->server) ? $this->server[$name] : null;
 	}	
 	
 	/**
-	 * возвращает значение серверной переменной  QUERY_STRING
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  QUERY_STRING
 	 *
-	 * @return string - значение переменной
+	 * @return string - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function getUri() {
-		return array_key_exists('DOCUMENT_URI', $this->server) ? $this->server['DOCUMENT_URI'] : null;
+	    return array_key_exists('REQUEST_URI', $this->server) ? $this->server['REQUEST_URI'] : null;
 	}	
 
+
 	/**
-	 * возвращает значение всех переменных
+	 * return internal uri$_SERVER[DOCUMENT_URI]
 	 *
-	 * @return mixed - значение переменной
+	 * @return string internel uri
+	 */
+	public function getIntUri() {
+		return array_key_exists('DOCUMENT_URI', $this->server) ? $this->server['DOCUMENT_URI'] : null;
+	}	
+	
+	
+	/**
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 *
+	 * @return mixed - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function getVars() {
 		return $this->Data;
 	}
 	
 	/**
-	 * возвращает значение всех переменных
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
-	 * @return array - данные о загруженном файл:
+	 * @return array - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ:
 	["userfile"]=>  array(5) {
     	["name"]=  "2.jpg" 
     	["type"]=> "image/jpeg"

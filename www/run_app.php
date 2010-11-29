@@ -1,8 +1,8 @@
 <?
 //phpinfo();
 /**
- * этот скрипт запускается из WEB, 
- * все запросы заварачиваются на вызов этого скрипта 
+ * пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ WEB, 
+ * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
  */
 include ('../inc.php');
 
@@ -17,7 +17,7 @@ if ( $ssi ) {
 	include ('../lib/App/ApplicationSsi.php');
 	$app = new ApplicationSsi( $name );
 } else {
-    require_once('lib/App/Application.php' );
+    require_once('../lib/App/Application.php' );
 	$app = new Application( $name, 'web' );
 }		
 $app->run($_SERVER);

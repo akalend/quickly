@@ -1,13 +1,13 @@
 <?
 /**
- * класс обертка Blitz
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Blitz
  *
  * @author akalend
  * @package quickly
  */
 
 /**
- * класс обертка Blitz
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Blitz
   *
  */
 class Template extends blitz {
@@ -31,7 +31,7 @@ class Template extends blitz {
 	}
 	
 
-	protected function __call($name, $args) {
+	public function __call($name, $args) {
 		$name[0] = strtoupper( $name[0]);
 		$className = 'Block'.$name;
 		
