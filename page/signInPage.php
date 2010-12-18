@@ -1,45 +1,70 @@
 <?php
 
-class signInPage extends basePage {
+class signInPage extends ajaxPage {
 
-	protected $URL='/signin';
-	protected  $template_name='signin';
-	//protected $_Cached = true;
-	
-	/**
-	 * конструктор страницы signIn
-	 *
-	 * @param IRequest $Request - данные запроса
-	 * @param Session $Session  - сессионные данные
-	 */
-	public function __construct(Request $Request=null,Session $Session=null) {
+	public function __construct(Request $Request,Session $Session) {
 		parent::__construct($Request,$Session);;
 		
 	}
 	
-	/**
-	 * вызывается для каждой страницы
-	 *
-	 */
 	public function run() {
-
+        $time = time() + 30 * 24 * 3600;
+        
+	    $this->Model = new UserModel();
 		if( $this->Request->hasVar() ) {
 			$data =   $this->Request->getVars();
-			unset($data['PHPSESSID']);
-			//$query_string = http_build_query( $data );
-			 //$this->Request->getVar( 'login')  $this->Request->getVar( 'login')  );
-			$this->Model = new UserModel();
-			$res = $this->Model->checkPassword($this->Request->getVars() );
-			if (is_null($res)) {
-				$this->redirectTo('indexPage',$data );
+			unset($data['SID']);
+
+			$res = $this->Model->checkPassword($data);
+			if (is_null($res) || !isset($res[0])) {
+				$this->View['error'] = 304;
+				return;
 			}	
 			
 			$this->Session->set('webUser', $res[0]);
-			$this->redirectTo('userPage', $res[0]);
-			 return false;
-		}
-		
-		$this->View->bind( 'page' , array()  );
+			
+			if ( $data['mem'] == 'true') {
+			     setcookie('tfn24const',str_rot13($res[0]['id'].'#'.$res[0]['code']), $time,'/');
+			}
+			if (!$res[0]['name'])
+			    $res[0]['name'] = $res[0]['login']; 
+			
+			unset($res[0]['login']);    
+			unset($res[0]['code']); 
+			$this->View['user'] = $res[0]; 
+			return;
+		} else {		    
+		  $this->checkCookie($time);
+	   }
+	}
+	
+	private function checkCookie($time) {
+	    $token = $this->Request->getCookie('tfn24const');
+		  if (!$token) {
+				$this->View['error'] = 304;
+				return;
+		  }
+		  $token = str_rot13($token);
+		  $token_id = strtok($token,'#');
+		  $token_code = substr(strrchr($token, '#'),1);
+		   
+          $res = $this->Model->checkCode(array('id'=>$token_id, 'code'=>$token_code));
+		  $this->View['debug'] = array('id'=>$token_id, 'code'=>$token_code);  
+		  
+		  if (is_null($res) || !isset($res[0])) {
+		        $log->toLog('return');
+				$this->View['error'] = 404;
+				return;
+		  }
+		  
+		  if (!$res[0]['name']) {
+		      $res[0]['name'] = $res[0]['login'];
+		      unset($res[0]['login']);
+		  }
+		  
+		  setcookie('tfn24const',str_rot13($token_id.'#'.$token_code), $time,'/');
 
+		  $this->View['user'] = $res[0];
+		  $this->Session->set('webUser', $res[0]);
 	}
 }

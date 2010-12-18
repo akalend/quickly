@@ -3,31 +3,19 @@
  * the example test page
  *
  */
-class testPage extends basePage {
+class testPage extends ajaxPage {
 	
-	protected $args = array(
-		'user_id' => null,
-	);
 	
-	protected $template_name='catalog';
-	protected $URL = '/test/';
-	
-	/**
-	 * ����������� �������� User
-	 *
-	 * @param IRequest $Request - ������ �������
-	 * @param Session $Session  - ���������� ������
-	 */
 	public function __construct(Request $Request=null,Session $Session=null) {
 		parent::__construct($Request,$Session);
 		
 	}
 	
-	/**
-	 * ���������� ��� ������ ��������
-	 *
-	 */
 	public function run() {
+	    die('{"login":"'.$this->Request->get('login').'", "password" : "'.$this->Request->get('password').'"}');
+	}
+	
+	public function run2() {
 		$CM = new CategoryModel();
 		if (is_null($this->args['cat_name'])) {
 			$data = array( 'item' =>  $CM->getTree());

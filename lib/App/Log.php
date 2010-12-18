@@ -61,11 +61,13 @@ class Log {
 	 * @param int  $level log level
 	 */
 	public function toLog($message, $level = self::ERROR ) {
-		if (!$fd) $this->open();
 		
 		if ( $level > $this->set_level) return;
 		$str_level = $this->level[$level];
 		
+		if (!is_resource($this->fd))
+		  $this->open();
+		  
 		if (is_array($message))
 			$message = var_export($message,true);
 		
@@ -81,5 +83,7 @@ class Log {
 
 	private function open() {		
 		$this->fd = fopen( APP_PATH.'/tmp/'.self::filename ,'a');
+		if (!is_resource($this->fd))
+		  throw new Exception('can not open file:'.self::filename);
 	}
 }

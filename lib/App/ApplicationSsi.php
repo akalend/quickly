@@ -6,8 +6,8 @@ class ApplicationSsi {
 		$beginsTime,$beginmTime,
 		$page,
 		$className,
+		$Session,
 		$filename,
-		$mode,
 		$bindBlockData=array();
 			
 	public function  __construct( $name ){
@@ -16,7 +16,7 @@ class ApplicationSsi {
 		$this->beginmTime = $this->microtime(microtime());
 		$this->beginsTime = time();
 		$this->pageName =  $name;
-		$this->mode = $mode;
+		
 		
 		include(APP_PATH.'/lib/App/Config.php' );
 		// include(APP_PATH.'/script/baseScript.php');
@@ -29,7 +29,6 @@ class ApplicationSsi {
 	    require_once('../page/basePage.php' );
 	    require_once( APP_PATH.'/'.$this->fileName );
 	    $this->Session = new Session;
-
 		try {						
 			$this->page = new $this->className( $this->Request, $this->Session);
 		} catch ( Exception $e ) {
@@ -42,7 +41,7 @@ class ApplicationSsi {
 	public function run( $args=null ) {
 	    
 		register_shutdown_function('saveClassCache');
-		
+
 		$this->page->init($args);
 		$this->page->run();
 
@@ -61,10 +60,9 @@ class ApplicationSsi {
 			} 
 		}
 		
-		
 		echo $htmlBlocks['page'];
 		$delta = $this->microtime(microtime()) - $this->beginmTime;
-		echo '<br><br> produce time='. sprintf('%0.3f s', $delta);			
+		echo '<!-- produce time=' .( $this->microtime(microtime()) - $this->beginmTime) . ' in sec -->';				
 	}
 	
 	

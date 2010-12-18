@@ -19,7 +19,7 @@ class Session {
 	 *
 	 */
 	function __construct( ){
-		//session_start();
+		session_start();
 		$this->Data = $_SESSION;
 		
 	}
@@ -56,4 +56,14 @@ class Session {
 		$_SESSION[$name] = $value;
 	}
 	
+	/**
+	 * The clean data from session
+	 *
+	 * @param unknown_type $name
+	 */
+	public function clean( $name ) {
+		unset($this->Data[$name]);
+		unset($_SESSION[$name]);
+	}
+
 }

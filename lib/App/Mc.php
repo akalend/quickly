@@ -1,14 +1,14 @@
 <?
 /**
- * класс обертка memcache
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ memcache
  *
  * @author akalend
  * @package quickly
  */
 
 /**
- * класс обертка memcache
- * реализован как синглентон
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ memcache
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  */
 class Mc {
@@ -17,16 +17,16 @@ class Mc {
 	private static $timeOut = 600; // set timeOut=10 min
 	
 	/**
-	 * конструктор класса
-	 * делаем его приватным
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	private function __construct(){	}
 		
 	/**
-	 * класс синглетона
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
-	 * @param array $config - данные из конфига
+	 * @param array $config - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 * @return object Memcached
 	 */
 	public static function getInstance( array $config){
@@ -39,21 +39,21 @@ class Mc {
 	
 	
 	/**
-	 * возвращает значение переменной
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 * @param string $name
-	 * @return mixed - значение переменной
+	 * @return mixed - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	static public function get( $name ) {
 		return self::$mc->get($name);
 	}
 	
 	/**
-	 * устанавливает значение переменной
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
-	 * @param string $name - ключ переменной 
+	 * @param string $name - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	 * @param mixed $date
-	 * @param integer $time - время в секундах - на сколько мы устанавливаем время жизни переменной
+	 * @param integer $time - пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	static public function set( $name, $date, $time = null) {
@@ -62,5 +62,23 @@ class Mc {
 		return self::$mc->set($name, $date, $time);
 	}
 	
+    /**
+	 *  delete the data from cache 
+	 *
+	 * @param string $name
+	 * @return mixed -  
+	 */
+	static public function delete( $name ) {
+		return self::$mc->delete($name);
+	}
+
+	/**
+	 * Flush the cache
+	 *
+	 * @return bool the result operation
+	 */
+	static public function flush() {
+		return self::$mc->flush();
+	}
 	
 }

@@ -25,8 +25,9 @@ abstract class  basePage {
 	 * @param Request $Request - ������ �������
 	 * @param Session $Session	- ����� ������
 	 */
-	public function __construct( Request $Request = null , Session $Session = null) {
+	public function __construct( Request $Request, Session $Session) {
 		$this->Request=$Request;		
+		$this->Session = $Session;
 		$this->View= new View($Request,$Session);
 	}
 	
@@ -130,7 +131,7 @@ abstract class  basePage {
 	 */
 	protected function redirectTo($url, $query = '') {
 		
-		$class = new $url;
+		$class = new $url($this->Request, $this->Session);
 
 		if ( is_string( $query) ) {
 			if ($query != '') 
@@ -148,7 +149,6 @@ abstract class  basePage {
 			$b->load($TPL);
 			$b->block('url', $query);
 			$header = $b->parse();	
-
 			
 		} else 	{
 //			var_dump(  $url, $query );
@@ -160,8 +160,9 @@ abstract class  basePage {
 		debug_backtrace()
 		);
 		*/
-		//echo $header;
-		Header( $header );
+		//echo $header; exit;
+		
+		header( $header );
 		//@TODO
 		//�������� ���� ���-�� ��������������
 		exit();
@@ -199,7 +200,7 @@ abstract class  basePage {
 
 	protected function checkIsEmpty(&$data, $field){
 		if ( trim($data[$field]) == '' ) {
-			$data['error_'.$field] = '�� ���������';
+			$data['error_'.$field] = 'пустое поле';
 			return true;
 		}
 		return false;
@@ -207,7 +208,7 @@ abstract class  basePage {
 
 	protected function checkIsEQ(&$data, $field1, $field2){
 		if ( trim($data[$field1]) != trim($data[$field2]) ) {
-			$data['error_'.$field1] = '�� ���������';
+			$data['error_'.$field1] = 'не равно';
 			return true;
 		}
 		return false;
@@ -221,7 +222,7 @@ abstract class  basePage {
 	
 	protected function checkEmail(&$data, $field){
 		if ( !preg_match('/^([a-z1-9\-\.]+)@([a-z1-9\-\.]+)\.([a-z]{2,4})$/' , $data[$field])) {
-			$data['error_'.$field] = '�� ���������� ������';
+			$data['error_'.$field] = 'ошибка email формата';
 			return true;
 		}
 		return false;

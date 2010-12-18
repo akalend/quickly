@@ -91,6 +91,7 @@ class View {
 			$this->template->set($this->scalarData);		
 		
 		foreach ( $this->bindData as $key=>$data ) {
+		    //echo '<font color="blue">'.$key.' </font>';
 			$this->template->context('/'.$key);		
 			$this->template->set( $data );		
 

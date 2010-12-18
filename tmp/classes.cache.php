@@ -10,4 +10,11 @@ $classesCache = array (
   'DbConvert' => 'lib/Db/DbConvert.php',
   'Application' => 'lib/App/Application.php',
   'Mc' => 'lib/App/Mc.php',
+  'NewsModel' => 'lib/News/NewsModel.php',
+  'ajaxPage' => 'page/ajaxPage.php',
+  'UserModel' => 'lib/User/UserModel.php',
+  'Mail' => 'lib/App/Mail.php',
+  'indexPage' => 'page/indexPage.php',
+  'newsPage' => 'page/newsPage.php',
+  'userPage' => 'page/userPage.php',
 );

@@ -8,12 +8,12 @@ class indexPage extends basePage {
 	
 	public  $CachingKey = '/';
 	/**
-	 * конструктор страницы User
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ User
 	 *
-	 * @param IRequest $Request - данные запроса
-	 * @param Session $Session  - сессионные данные
+	 * @param IRequest $Request - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param Session $Session  - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
-	public function __construct(Request $Request=null,Session $Session=null) {
+	public function __construct(Request $Request,Session $Session) {
 		parent::__construct($Request,$Session);;
 		
 	}
@@ -26,7 +26,7 @@ class indexPage extends basePage {
 	}
 	
 	/**
-	 * вызывается для каждой страницы
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	public function run() {

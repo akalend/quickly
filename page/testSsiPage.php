@@ -3,7 +3,7 @@
  * the example test page
  *
  */
-class testSsiPage extends basePage {
+class test2Page extends basePage {
 	
 	protected $args = array(
 		'user_id' => null,
@@ -31,12 +31,7 @@ class testSsiPage extends basePage {
 	 *
 	 */
 	public function run() {
-		
-		$this->Model = new UserProfileModel( $this->args['user_id'] );
-		$data = $this->Model->getProfile();   
-
-		$this->View->bind('page',  $data); 						// bind to block
-		
+		die("*****");
 		
 	}
 }

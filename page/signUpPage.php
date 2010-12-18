@@ -7,10 +7,10 @@ class signUpPage extends basePage {
 	//protected $_Cached = true;
 	
 	/**
-	 * конструктор страницы signIn
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ signIn
 	 *
-	 * @param IRequest $Request - данные запроса
-	 * @param Session $Session  - сессионные данные
+	 * @param IRequest $Request - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param Session $Session  - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function __construct(Request $Request=null,Session $Session=null) {
 		parent::__construct($Request,$Session);;
@@ -18,35 +18,49 @@ class signUpPage extends basePage {
 	}
 	
 	/**
-	 * вызывается для каждой страницы
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	public function run() {
 
-		
-		if( $this->Request->hasVar() ) {
+	    		    
+	    $isOk = false;
+		if( $this->Request->hasVar('login') ) {
 			$data = $this->Request->getVars() ;
+			$data['ip'] = ip2long($this->Request->getServer('REMOTE_ADDR'));
 
-			if ( !$this->checkError( $data ) ) {
+			if ( $this->checkError( $data )) { 
+		      	$isOk = true;
+			} else {    
 				$this->Model = new UserModel();	
-				$this->Model->add($data);
-				$data['server'] = $this->Request->getServer('SERVER_NAME');
-				$this->View->bind( 'mail' , array($data) );
-
-			}
-		} 
-		else {
-			$data=array( ''=>'');
-		}
+				$res = $this->Model->add($data);
+				//@TODO this hack !!!
+				$data['server'] = 'localhost' ;//$this->Request->getServer('SERVER_NAME');
 				
-		$this->View->bind( 'page' , $data );
+				$this->View->bind('mail' , array($data));				
+				$isOk = !$res;
+			} 
+			
+		} else {
+		    // clear form
+			$data = array( ''=>'');
+			$isOk = true;
+		}
+		
+		if (!$isOk) {
+		   $data['mail'] = Mail::format( $data, $this->template_name );
+
+		}
+		  
+		$data['ok'] = $isOk;  
+		$this->View->bind('page' , $data);		
 	}
 	
 	/**
-	 * валидатор проверки данных
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
-	 * @param &array  $data - входные/выходные данные
-	 * @return true если есть ошибки
+	 * @param &array  $data - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @return true пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	protected function checkError(&$data){
 			$is_err = false;

@@ -6,13 +6,14 @@ class Application {
 		$beginsTime,
 		$beginmTime,
 		$page,
+		$Session,
 		$className,
 		$filename,
 		$mode,
 		$bindBlockData=array();
 			
-	public function  __construct( $name , $mode ){
-		$this->Request = new Request;
+	public function  __construct( $name , $mode=null ){
+		$this->Request = new Request();
 		
 		$this->beginmTime = microtime();
 		$this->beginsTime = time();
@@ -30,7 +31,7 @@ class Application {
 
 							  require_once('../page/basePage.php' );
 							  require_once( APP_PATH.'/'.$this->fileName );
-							  $this->Session = new Session;
+							  $this->Session = new Session();
 							  break;
 			case 'script' 	: $this->className = "{$this->pageName}Script";
 							  $this->Session = null;
@@ -83,9 +84,7 @@ class Application {
 			} 
 		}
 		echo $res;
-		
-				
-		echo '<br><br> produce time=' .(  time() - $this->beginsTime + microtime() - $this->beginmTime) . ' in sec';		
+		echo '<!-- produce time=' .(  time() - $this->beginsTime + microtime() - $this->beginmTime) . ' in sec -->';		
 	}
 	
 	/**

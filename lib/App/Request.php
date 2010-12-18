@@ -14,7 +14,7 @@ class Request {
 	private $Data;
 	private $server;
 	private $files;
-	
+	private $cookies;
 	/**
 	 * ����������� ������
 	 *
@@ -23,8 +23,13 @@ class Request {
 		$this->Data = $_REQUEST;
 		$this->server = $_SERVER;
 		$this->files = $_FILES;
+		$this->cookies = $_COOKIE;
 	}
 
+	public function getCookie($name) {
+	    return array_key_exists( $name, $this->cookies) ? $this->cookies[$name] : null;
+	}
+	
 	/**
 	 * Enter description here...
 	 *

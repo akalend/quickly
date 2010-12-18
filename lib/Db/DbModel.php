@@ -158,7 +158,8 @@ abstract class DbModel {
 				echo "<font color=blue>$sql</font><br>";
 				echo 'mysql error: '.$this->db->error;
 				$result = false;				
-				} 
+				return false;
+			} 
 	//			var_dump( $this->db,$res );
 				$time = microtime()-$time_start;
 			
@@ -243,7 +244,9 @@ abstract class DbModel {
 		return $this->db->affected_rows();
 	}
 	
-	
+	protected function getId() {
+		return $this->db->insert_id;
+	}
 	
 	/**
 	 * START TRANSACTION

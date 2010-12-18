@@ -11,24 +11,24 @@ class activatePage extends basePage {
 
 	
 	/**
-	 * конструктор страницы User
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ User
 	 *
-	 * @param IRequest $Request - данные запроса
-	 * @param Session $Session  - сессионные данные
+	 * @param IRequest $Request - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @param Session $Session  - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
-	public function __construct(Request $Request=null,Session $Session=null) {
+	public function __construct(Request $Request,Session $Session) {
 		parent::__construct($Request,$Session);;
 		
 	}
 	
 	/**
-	 * вызывается для каждой страницы
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	public function run() {
 		
 		$this->Model = new UserModel();
 		$this->Model->activate( $this->args);		
-		$this->redirectTo( 'indexPage' );
+		$this->redirectTo( 'newsPage' );
 	}
 }

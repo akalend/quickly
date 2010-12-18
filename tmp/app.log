@@ -1,0 +1,79 @@
+2010-18-12 04:04:21; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => NULL,
+)
+2010-18-12 04:07:37; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => NULL,
+)
+2010-18-12 04:09:08; ERROR   ; array (
+  'id' => '1',
+  'name' => '',
+  'login' => 'sasa',
+  'code' => '2a50dce7',
+)
+2010-18-12 04:09:46; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => '1',
+)
+2010-18-12 04:09:46; ERROR   ; array (
+)
+2010-18-12 04:10:50; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => '1',
+)
+2010-18-12 04:10:50; ERROR   ; array (
+)
+2010-18-12 04:12:42; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => '1',
+)
+2010-18-12 04:12:42; ERROR   ; array (
+)
+2010-18-12 04:13:29; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => '1',
+)
+2010-18-12 04:13:29; ERROR   ; array (
+)
+2010-18-12 04:15:39; ERROR   ; array (
+  'title' => 'title 2',
+  'newsCategory' => '1',
+  'text' => 'werwer
+werwerw
+werwer',
+  'SID' => '85e698005a3f34acd83d415a80b22e8b',
+  'user_id' => '1',
+)
+2010-18-12 04:15:39; ERROR   ; array (
+)
