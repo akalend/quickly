@@ -12,6 +12,7 @@ abstract class  basePage {
 				$View,
 				$mc,
 				$Model,
+				$User,
 				$BindGlobalData=array(),
 				$_Cached = false,
 				$layout = 'main',
@@ -69,8 +70,8 @@ abstract class  basePage {
 		 		$this->args[$key] = $_SERVER[$key];
 		 }
 		*/
-		 if ( isset( $this->template_name ) )
-		 	$this->View->setTemplateName($this->template_name);
+//		 if ( isset( $this->template_name ) )
+//		 	$this->View->setTemplateName($this->template_name);
 		 
 		/*	mc �� �����
 		 $conf = new Config();
@@ -107,11 +108,17 @@ abstract class  basePage {
 		return $this->blockNames;
 	}
 	
+	public function isLogining() {
+	    return @array_key_exists('id',$this->Session->get('webUser'));	    
+	}
 	/**
 	 * �finalize the page
 	 *
 	 */
 	public  function finalize() {
+		 if ( isset( $this->template_name ) )
+		 	$this->View->setTemplateName($this->template_name);
+	    
 		$res = $this->View->finalize();
 
 		// fix db 
@@ -130,13 +137,16 @@ abstract class  basePage {
 	 * @param string $query - �������� ������ �������
 	 */
 	protected function redirectTo($url, $query = '') {
-		
+			    
 		$class = new $url($this->Request, $this->Session);
 
+		if (!is_object($class))
+			throw new Exception( 'not corerct redirect class' );
+			
 		if ( is_string( $query) ) {
 			if ($query != '') 
 			  $query = '?'. $query;
-
+			  
 			  $header = 'Location: http://'. $_SERVER['SERVER_NAME'] .'/'. $class->getUrl .$query;
 
 		}

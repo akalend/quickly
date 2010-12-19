@@ -111,7 +111,12 @@ abstract class DbModel {
 	public function getStat() {
 		return $this->sqlCache;
 	}
-	
+
+	public function getUtf8() {
+		$this->db->query("SET NAMES 'UTF8'");
+	}
+				
+
 	/**
 	 * ������������� ������  db
 	 * ���������� � ��, ������������ � ������������
@@ -241,7 +246,7 @@ abstract class DbModel {
 	 * @return unknown
 	 */
 	protected function getRowCount() {
-		return $this->db->affected_rows();
+		return $this->db->affected_rows;
 	}
 	
 	protected function getId() {

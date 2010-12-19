@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+# script of nginx restart
+sudo kill -1 `cat /usr/local/nginx/logs/nginx.pid`

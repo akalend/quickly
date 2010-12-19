@@ -1,5 +1,7 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <title>{{title}}</title>
 <script  src="/js/lib/jquery.fs.js"></script>
 {{BEGIN js}}
@@ -15,11 +17,11 @@
 
 </head>
 <body bgcolor="white" text="black">
-<center><h1><a href="/">Welcome to Quckly project!</a></h1></center>
 
 {{BEGIN login}}{{login}}{{END}}
 
 {{BEGIN page}}
+
 
 <table>
 <tr>
@@ -29,8 +31,7 @@
 </div>
 </td>
 <td width="200px" height="200px" style="border: 1px solid; " valign="top" >
-Здесь банер или иной блок<br>зависящий от URI
-
+ РјРµСЃС‚Рѕ РїРѕРґ Р±Р°РЅРЅРµСЂ Рё РїСЂРѕС‡РёРµ Р±Р»РѕРєРё
 </td>
 </tr>
 </table>
@@ -43,7 +44,7 @@
 
 <div style="width:100%;  color: blue; padding-top: 20px;"">
 {{sql}} <br>
-time={{time}} sec
+    time={{time}} sec
 </div>
 {{END db}}
 

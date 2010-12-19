@@ -23,6 +23,10 @@ class UserModel extends DbModel {
 		FROM user
 		WHERE  is_active AND `id` = '{{i(id)}}' AND code ='{{s(code)}}'";
 
+	const SQL_SELECT_CHECK_EMAIL = "SELECT email,login
+		FROM user
+		WHERE  `email` = '{{s(email)}}' OR login = '{{s(login)}}'";
+
 	const SQL_UPDATE_ACTIVATE = "UPDATE  user
 		SET 
 		`is_active`=1
@@ -30,6 +34,7 @@ class UserModel extends DbModel {
 	
 
 	protected $user_id=null;
+	private $result;
 	
 	public function __construct( $user_id = null) {
 		parent::__construct();
@@ -39,7 +44,7 @@ class UserModel extends DbModel {
  	public function add(array &$data) { 		
  		$data['code'] = $this->getCode( $data );
  		$data['password'] = $this->getMd5( $data['psw'] );	 
- 		var_dump($data); exit;
+// 		var_dump($data); exit;
  		$this->init();
  		$this->start();
  		if (!$this->exec( self::SQL_ADD , $data )) {
@@ -67,7 +72,19 @@ class UserModel extends DbModel {
  		return $this->exec( self::SQL_SELECT_CHECK, $data); 
  	}
  	
- 	public function checkCode( $data) {
+ 	public function checkEmailAndLogin( $data) {
+ 	    $this->result = $this->exec( self::SQL_SELECT_CHECK_EMAIL, $data);
+ 		return is_null($this->result); 
+ 	}
+    public function testLogin($data) {       
+        return $data['login'] == $this->result[0]['login'];
+    } 
+ 	
+    public function testEmail($data) {
+        return $data['email'] == $this->result[0]['email'];
+    } 
+
+    public function checkCode( $data) {
  		return $this->exec( self::SQL_SELECT_CHECK_CODE, $data); 
  	}
 

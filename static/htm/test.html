@@ -1,0 +1,58 @@
+<html>
+<head>
+<script src="/js/lib/jquery.min.js" type="text/javascript" ></script>
+<script src="/js/lib/jquery.form.js" type="text/javascript" ></script>
+<script src="/js/lib/jquery.debug.js" type="text/javascript"></script>
+</head>
+<body>
+
+
+<script>
+     // wait for the DOM to be loaded 
+  var options = {
+	  url: "/test2/",
+ 	  beforeSubmit:  showRequest,	 
+	  success: function() {
+	        alert("Спасибо за комментарий!");
+	  }
+	};
+
+$(document).ready(function() { 
+        // bind 'myForm' and provide a simple callback function 
+     $('#myForm').ajaxForm(options); 
+}); 
+
+function showRequest(formData, jqForm, options) { 
+    // formData is an array; here we use $.param to convert it to a string to display it 
+    // but the form plugin does this for you automatically when it submits the data 
+    var queryString = $.param(formData); 
+ 
+    // jqForm is a jQuery object encapsulating the form element.  To access the 
+    // DOM element for the form do this: 
+    // var formElement = jqForm[0]; 
+ 
+    $.log('About to submit: \n\n' + queryString); 
+ 
+    // here we could return false to prevent the form from being submitted; 
+    // returning anything other than false will allow the form submit to continue 
+    return true; 
+} 
+</script>
+
+    <form  id="myForm" action="/test"  >
+        <div style="width: 600px;  border: doted 1 black;"><span style="width: 300px;">наименование</span> <input type="text" style="width: 400px;" name="title"></div>
+        <div style="width: 600px;  border: doted 1 black;"><span style="width: 300px;">категория</span><select name="newsCategory">
+        <option value="0" >-------</option>
+            <option value="1" >fff</option>
+        </select></div>
+        
+        <textarea name="text" rows="20" style="width: 600px;"></textarea>
+
+        <div style="width: 600px;"><input type="submit" value="Save"></div>
+    </form>
+
+
+<div style="height: 320px; width: 240px; background:#EEEEEE; border: dotted 1px;">*****<br>
+banner</div>
+
+</body></html>>
