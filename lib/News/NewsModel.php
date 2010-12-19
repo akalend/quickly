@@ -26,6 +26,10 @@ class NewsModel extends DbModel {
 	const SQL_SETHOT_NEWS = "UPDATE news 
 	                    SET ishot = 1
 						WHERE user_id = {{user_id}} AND id = {{id}};";
+	
+	const SQL_SELECT_BYID = "SELECT *
+						FROM news 
+						WHERE id = {{id}}";
 	/*
  CREATE TABLE `news` (
   `id` int(11) NOT NULL auto_increment,
@@ -76,6 +80,10 @@ class NewsModel extends DbModel {
 	    return array( 'news' => $this->data );	    
 	}
 
+	public function get($id) {	    
+	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id));
+	    return $this->data[0];	    
+	}
 	    
 	public function getHot($part) {
 	    $this->data = $this->exec( self::SQL_SELECT );

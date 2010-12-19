@@ -1,10 +1,13 @@
 <div>
 <div style="color: blue; font-family: Arial; font-size: 12pt">context:{{context}}</blockquote></div>
+
+
 {{BEGIN page}}
+
 {{IF isLogining}}
 <script src="js/lib/ajaxfileupload.js" type="text/javascript"></script>
 
-    <form  id="myForm" action="/test"  method="POST">
+    <form  id="myForm" action="/news/edit/{{id}}"  method="POST">
         <div style="width: 600px;  border: doted 1 black;"><span style="width: 300px;">наименование</span>
         <input type="text" value="{{title}}" style="width: 400px;" name="title"></div>
         <input type="hidden" value="{{id}}" style="width: 400px;" name="id">
@@ -113,10 +116,16 @@ function ajaxFileUpload()
 	 Вы должны залогиниться или зарегистрироваться
 	 
 	 сюда форму логина!!!<br>
-
-	 <div style="lenght: 70px;"><div style="lenght: 40px; float: left">логин</div><div style="lenght: 40px; float: left"><input type="text" name="login"></div>
-	 <div style="lenght: 40px; float: left">пароль</div><div style="lenght: 40px; float: left"><input type="text" name="password"></div><div>
-
+    <form action="/signin">
+	 <div style="width: 160px;">
+	   <div style="width: 60px; float: left">логин</div><div style="width: 100px; float: left">
+	       <input type="text" name="login" style="width: 100px;"></div>
+	   <div style="width: 60px; float: left">пароль</div>
+	           <div style="width: 100px; float: left"><input style="width: 100px; float: left" type="text" name="password"></div>
+	    <div><input style="align: center; width: 25px; float: left; font: 6pt Verdanta;" type="submit" value=">>" /></div>
+	   
+	 </div>
+    </form>    
     </div>	
 {{END}}   
 

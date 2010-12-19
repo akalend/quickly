@@ -19,7 +19,7 @@
 </div>
 <div>
     <div style="text-align: center; height : 90px; border : 1px dotted; width : 90px; float: left;">
-        <h5>Logo</h5>
+        <h5><a href="/">Logo</a></h5>
     </div>
     <div style="height : 90px; border : 1px dotted; width : 190px; float: left;">
         <a href="">О проекте</a><br/>

@@ -1,6 +1,6 @@
 <?php
 /**
- * the example test page
+ * the news edit page
  *
  */
 class newsPage extends basePage {
@@ -71,13 +71,24 @@ class newsPage extends basePage {
 	}
 
 	private function edit() {
-	    $this->template_name = 'newsedit';
-//	    var_dump($this->isLogining()); exit;
-//	    die ('edit' . $this->args['id']);
-	    $this->View->bind( 'page', array('isLogining'=>$this->isLogining(),));
+	    if ($this->Request->hasVar()) {
+	        
+	    }
+	    $this->showPage();
 	}
 	
-	    
+	private function showPage() {
+	    $this->template_name = 'newsedit';
+	    $res = $this->Model->get($this->args['id']);
+//	    var_dump($res);
+	    $data = array('isLogining' => $this->isLogining(),
+	                  'id' =>    $res['id'],
+	                  'title' => $res['title'],
+	                  'text' =>  $res['text'],);
+//	    var_dump($data); exit;
+	    $this->View->bind( 'page', $data);
+	}
+	
 	private function showMy() {
 	    
 	    $user = $this->Session->get('webUser');
