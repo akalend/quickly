@@ -72,20 +72,40 @@ class newsPage extends basePage {
 
 	private function edit() {
 	    if ($this->Request->hasVar()) {
+	        $data = $this->Request->getVars();
+	        $is_err = $this->checkFielsd($data);
 	        
-	    }
-	    $this->showPage();
-	}
-	
-	private function showPage() {
-	    $this->template_name = 'newsedit';
-	    $res = $this->Model->get($this->args['id']);
+	        if(!$is_err) {
+	            $db_res = $this->Model->update($data);
+	            if($db_res)
+	               $this->redirectToUrl('/news/me/');// TODO redirect by referer;	            
+	        }
+	        $data['isLogining'] = $this->isLogining();
+	    } else {
+	        $res = $this->Model->get($this->args['id']);
 //	    var_dump($res);
-	    $data = array('isLogining' => $this->isLogining(),
+	        $data = array('isLogining' => $this->isLogining(),
 	                  'id' =>    $res['id'],
 	                  'title' => $res['title'],
-	                  'text' =>  $res['text'],);
-//	    var_dump($data); exit;
+	                  'text' =>  $res['text'],
+	                  'newsCategory' => $res['newsCategory'],);	        
+	    }
+	    $this->showPage($data);
+	}
+	
+	private function checkFielsd(&$data) {
+			$is_err = false;
+			
+			// all validation functions must  return true if error exist.
+			$is_err = $is_err || $this->checkIsEmpty( $data, 'title' );
+			$is_err = $is_err || $this->checkIsEmpty( $data, 'text' );
+			return $is_err;					    
+	}
+	
+	private function showPage($data) {
+	    $this->template_name = 'newsedit';
+	    $category = $this->Model->getCategory($data['newsCategory']);
+	    $data['category'] = $category; //var_dump($data);
 	    $this->View->bind( 'page', $data);
 	}
 	

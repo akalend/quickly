@@ -14,8 +14,8 @@ define("LIBLK_PATH" ,APP_PATH.'/lib/Block/' );
 define("STATIC_PATH" ,APP_PATH.'/static/' );
 define("IMAGE_PATH" , STATIC_PATH.'img/' );
 
-define("AVATAR_PATH" ,IMG_PATH.'avatar/' );
-define("PREVIW_PATH" ,IMG_PATH.'48/' );
+//define("AVATAR_PATH" ,IMG_PATH.'avatar/' );
+//define("PREVIW_PATH" ,IMG_PATH.'48/' );
 
 require_once('lib/App/saveClassCache.php' );
 

@@ -130,6 +130,21 @@ abstract class  basePage {
 		
 	}
 
+    protected function redirectToUrl($url, $query = '') {
+			if ($query != '') 
+			  $query = '?'. $query;
+			  
+			if (!$_SERVER['SERVER_NAME'])
+			     $_SERVER['SERVER_NAME'] = 'localhost';
+			$slash = '/';
+			if ($url[0] == '/')
+			 $slash = '';  
+			     
+			$header = "Location: http://{$_SERVER['SERVER_NAME']}$slash$url$query";
+			header( $header );
+    		exit();        
+    }
+	
 	/**
 	 * redirect �� ����� ��������
 	 *

@@ -5,20 +5,22 @@
 {{BEGIN page}}
 
 {{IF isLogining}}
-<script src="js/lib/ajaxfileupload.js" type="text/javascript"></script>
+<script src="/js/lib/ajaxfileupload.js" type="text/javascript"></script>
 
     <form  id="myForm" action="/news/edit/{{id}}"  method="POST">
         <div style="width: 600px;  border: doted 1 black;"><span style="width: 300px;">наименование</span>
-        <input type="text" value="{{title}}" style="width: 400px;" name="title"></div>
+        <input type="text" value="{{title}}" style="width: 400px;" name="title"> {{IF error_title}}<span style="color: red">не пустое</span>{{END}} </div>
         <input type="hidden" value="{{id}}" style="width: 400px;" name="id">
         <div style="width: 600px;  border: doted 1 black;"><span style="width: 300px;">категория</span>
             <select name="newsCategory">
         <option value="0" >-------</option>
         {{BEGIN category}}
-            <option value="{{id}}" >{{title}}</option>
+            <option value="{{id}}" {{IF selected}}selected{{END}} >{{title}}</option>
         {{END category}}    
         </select></div>
+ 
         
+        {{IF error_text}}<div style="color: red">не пустое</div>{{END}}        
         <textarea name="text" rows="20" style="width: 600px;">{{text}}</textarea>
 
                 
@@ -30,26 +32,15 @@
     <div style="padding-top:15px; width: 600px;"><span style="">загрузить картинку</span>
         <form name="form" action="" method="POST" enctype="multipart/form-data">
         <input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input">
+         <input type="hidden" name="id" id="newsId" value="{{id}}" />
         <button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>
         </form>
-
+        {{IF hasImage}}
+        <img id="newsImg" />
+        {{END}}
     </div>  
 
 <script>
-
-var options = {
-	  url: "/ajax/newsadd",
- 	  beforeSubmit:  showRequest,	 
-	  success: function() {
-	       
-	        alert("Спасибо за добавление новости\nсейчас произойдет перенаправление в Ваш раздел.");
-	        document.location.href='/news/me/'
-	  }
-	};
-
-$(document).ready(function() { 
-     $('#myForm').ajaxForm(options); 
-}); 
 
 function showRequest(formData, jqForm, options) { 
     // formData is an array; here we use $.param to convert it to a string to display it 
@@ -81,7 +72,7 @@ function ajaxFileUpload()
 		$.ajaxFileUpload
 		(
 			{
-				url:'/upload', 
+				url:'/upload?id={{id}}', 
 				secureuri:false,
 				fileElementId:'fileToUpload',
 				dataType: 'json',
@@ -94,8 +85,11 @@ function ajaxFileUpload()
 							alert(data.error);
 						}else
 						{
-							alert(data.msg);
+						    alert(data.msg);
 						}
+					} else {
+					  $("#newsImg").attr('src','/img/'+data.url);
+					  //$.log($("#newsImg").attr('src'));
 					}
 				},
 				error: function (data, status, e)

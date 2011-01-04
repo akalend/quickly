@@ -60,7 +60,9 @@ class ApplicationSsi {
 			} 
 		}
 		
-		echo $htmlBlocks['page'];
+		if (array_key_exists( 'page',$htmlBlocks))
+		      echo $htmlBlocks['page'];
+		      
 		$delta = $this->microtime(microtime()) - $this->beginmTime;
 		echo '<!-- produce time=' .( $this->microtime(microtime()) - $this->beginmTime) . ' in sec -->';				
 	}

@@ -1,7 +1,4 @@
 <?php
-/**
- * ������� ������
- */
 
 $db_conf = array(
 	'host' 		=> 'localhost',
@@ -24,4 +21,3 @@ $app_logger  = array(
 	'level' 	=> Log::ERROR ,
 	'filename' 	=> 'tmp/app.log',
 );
-

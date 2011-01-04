@@ -33,12 +33,12 @@
     <div style="padding-top:15px; width: 600px;"><span style="">загрузить картинку</span>
         <form name="form" action="" method="POST" enctype="multipart/form-data">
         <input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input">
-        <button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>
+        <button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>       
         </form>
-
+   {{END picture}} 
     </div>  
     убрал пока
-    {{END picture}} 
+    
 <script>
 
 var options = {

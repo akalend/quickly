@@ -30,6 +30,8 @@ class NewsModel extends DbModel {
 	const SQL_SELECT_BYID = "SELECT *
 						FROM news 
 						WHERE id = {{id}}";
+	
+	const SQL_SELECT_CATEGORY = "SELECT id,title FROM newsCategory";
 	/*
  CREATE TABLE `news` (
   `id` int(11) NOT NULL auto_increment,
@@ -43,9 +45,37 @@ class NewsModel extends DbModel {
  
 */	
 	const SQL_INSERT = "INSERT INTO news (title,text, newsCategory,date,user_id) 
-						VALUES( '{{s(title)}}', '{{s(text)}}', {{i(newsCategory)}},NOW(), {{user_id}} )";
+						VALUES( '{{s(title)}}', '{{s(text)}}', {{i(newsCategory)}},NOW(),{{user_id}} )";
+	
+	const SQL_UPDATE = "UPDATE news SET
+	                    title = '{{s(title)}}',
+	                    text = '{{s(text)}}', 
+	                    newsCategory = {{i(newsCategory)}}
+						WHERE id={{i(id)}}";
+	
+	const SQL_IMG_UPDATE = "UPDATE news SET
+	                    haveImage = {{set_img}}
+						WHERE id={{i(id)}} AND user_id = {{i(user_id)}}"; 
 	
 	private $data;
+	
+	public function setImage($id, $user_id) {
+	    $data = array('id' => $id, 'set_img' => 1, 'user_id' => $user_id);    
+	    $this->query(self::SQL_IMG_UPDATE, $data);
+	    return $this->getRowCount();
+	}
+
+	public function unsetImage($id,$user_id) {
+	    $data = array('id' => $id, 'set_img' => 0, 'user_id' => $user_id);    
+	    $this->query(self::SQL_IMG_UPDATE, $data);
+	    return $this->getRowCount();
+	}
+	
+	public function update($data) {
+	    $this->query("SET NAMES 'UTF8'"); // TODO fix all tables to UTF-8
+	    $this->query(self::SQL_UPDATE, $data);
+	    return $this->getRowCount();
+	}
 	
 	public function deactivate($news_id, $user_id) {
 	   $data = array('id' => $news_id, 'user_id' => $user_id);    
@@ -81,10 +111,28 @@ class NewsModel extends DbModel {
 	}
 
 	public function get($id) {	    
-	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id));
+	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id) );
 	    return $this->data[0];	    
 	}
+
+	public function getCategory($id = null) {
+	    $conf = new Config();
+	    $mc = Mc::getInstance($conf->get('mc'));
 	    
+	    $data = $mc->get('newsCategory');
+	    if (!$data) {
+	       $data = $this->exec( self::SQL_SELECT_CATEGORY );
+	       $mc->set('newsCategory', $data);
+	    }
+	    if ($id)
+	    foreach ($data as &$row) {
+	        if ($row['id'] == $id)
+	           $row['selected'] = 'selected';
+	    }
+	    //var_dump($this->data);
+	    return $data;	    
+	}
+	
 	public function getHot($part) {
 	    $this->data = $this->exec( self::SQL_SELECT );
 	    if (!$this->data)
@@ -99,6 +147,8 @@ class NewsModel extends DbModel {
 
 	private function cutText(&$item) {
           $txt = $item['text'];
+          if (strlen($txt) < self::ANONS_MIN) 
+                        return;
           for ($i = self::ANONS_MIN ; $i < self::ANONS_MAX; $i++) {
             if ($txt[$i] == '.' && $txt[$i+1] == ' ')
                 break;

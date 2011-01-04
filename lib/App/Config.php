@@ -2,14 +2,14 @@
 
 
 /**
- * класс обертка параметров конфигурации
+ * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @author akalend
  * @package quickly
  */
 
 /**
- *  класс обертка параметров конфигурации
+ *  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  */
 class Config {
@@ -19,9 +19,10 @@ class Config {
 	private $mongo;
 	private $name = null;
 	private $data = null;
+	//private $ngx = null;
 	/**
-	 * конструктор класса 
-	 * по умолчанию грузит системные конфиги
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
 	function __construct( $name = null, $section = null ){
@@ -30,24 +31,27 @@ class Config {
 			$this->db=$db_conf;
 			$this->mc=$mc_conf;
 			$this->mongo=$mongo_conf;
+			//$this->ngx=$ngx_conf;
 			return $this;
 		} 
 		
 		require( APP_PATH."/conf/$name.conf.php"  );
-		$this->$name = $name;
+		$this->name = $name;
 		$section_name = $name.'_'.$section;
 		$this->data = $$section_name;		
 		return $this;
 	}
 
 	/**
-	 * Получить значение параметров
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
-	 * @param  string $name - имя сессионной переменной 
-	 * @return mixed - возвращает данные секции если ни существуют 
+	 * @param  string $name - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+	 * @return mixed - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	 */
-	public function get( $name ) {
+	public function get( $name ) {	    
+//	    var_dump( $this->name, $this->data );
 		if ( !is_null( $this->name )  &&  !is_null( $this->data)) {
+//		    echo '----------';
 			if ( isset( $this->data['name'] ))
 				return $this->data['name'];
 		}
@@ -57,15 +61,15 @@ class Config {
 		return $this->{$name};
 	}
 	/**
-	 * получить из конфига секцию параметров 
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	 *
-	 * @param string $name имя секции
-	 * @return array - секция параметров
+	 * @param string $name пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 * @return array - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public function getSection($name=NULL) {
 		if ( $name) {
 			$section_name = $this->name.'_'.$name;
-			$this->data = $$section_name;
+			$this->data = $$section_name;			
 		}
 		return $this->data;
 	}

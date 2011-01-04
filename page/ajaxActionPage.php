@@ -14,6 +14,7 @@ class ajaxActionPage extends ajaxPage {
 //	    var_dump($this->args['action']);	
 	   switch ($this->args['action']) {
 	       case 'newsadd': {$this->addNews(); break;}    
+	       case 'imgdel':  {$this->imgDel(); break;}    
 	       default: $this->noAction();
 	    } 
 	}
@@ -33,6 +34,13 @@ class ajaxActionPage extends ajaxPage {
 	   $this->View['id'] = $newsNodel->add($data);    
 	}
 	
+	
+	private function imgDel() {
+	   $user = $this->Session->get('webUser'); 
+	   $data['user_id'] = $user['id'];	    
+	   $newsNodel = new NewsModel();
+	   $newsNodel->unsetImg();
+	}
 	
 	private function noAction() {
 	    $this->View['error'] = 'action "'.$this->args['action'].'"not found';

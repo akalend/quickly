@@ -1,156 +1,40 @@
-2010-18-12 04:04:21; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => NULL,
+2010-24-12 03:06:08; ERROR   ; 
+2010-24-12 03:06:08; ERROR   ; array (
+  0 => 
+  array (
+    'sql' => 'UPDATE news SET
+	                    haveImage = 1
+						WHERE id=8 AND user_id = 0',
+    'time' => 0.000482,
+  ),
 )
-2010-18-12 04:07:37; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => NULL,
-)
-2010-18-12 04:09:08; ERROR   ; array (
+2010-24-12 03:07:26; ERROR   ; array (
   'id' => '1',
   'name' => '',
   'login' => 'sasa',
-  'code' => '2a50dce7',
+  'code' => '558fd037ee4b2673',
 )
-2010-18-12 04:09:46; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
+2010-24-12 03:07:26; ERROR   ; array (
+  0 => 
+  array (
+    'sql' => 'UPDATE news SET
+	                    haveImage = 1
+						WHERE id=8 AND user_id = 0',
+    'time' => 0.000563,
+  ),
 )
-2010-18-12 04:09:46; ERROR   ; array (
+2010-24-12 03:08:51; ERROR   ; array (
+  'id' => '1',
+  'name' => '',
+  'login' => 'sasa',
+  'code' => '558fd037ee4b2673',
 )
-2010-18-12 04:10:50; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 04:10:50; ERROR   ; array (
-)
-2010-18-12 04:12:42; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 04:12:42; ERROR   ; array (
-)
-2010-18-12 04:13:29; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 04:13:29; ERROR   ; array (
-)
-2010-18-12 04:15:39; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 04:15:39; ERROR   ; array (
-)
-2010-18-12 04:55:50; ERROR   ; array (
-  'title' => 'title 2',
-  'newsCategory' => '1',
-  'text' => 'werwer
-werwerw
-werwer',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 04:55:50; ERROR   ; array (
-)
-2010-18-12 05:13:21; ERROR   ; array (
-  'title' => 'фывфыв',
-  'id' => '',
-  'newsCategory' => '0',
-  'text' => 'фывфыв
-фывфыв
-фывфвыфыв
-фывфыв фывфывфв фвыфвыф ывфывф
-явыфв ываываав ывавыаыва
-выа ыа вапвпв а арпа',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 05:13:21; ERROR   ; array (
-)
-2010-18-12 05:14:39; ERROR   ; array (
-  'title' => 'фывфыв',
-  'id' => '',
-  'newsCategory' => '2',
-  'text' => 'фывфыв
-фывфыв
-фывфвыфыв
-фывфыв фывфывфв фвыфвыф ывфывф
-явыфв ываываав ывавыаыва
-выа ыа вапвпв а арпа',
-  'SID' => '85e698005a3f34acd83d415a80b22e8b',
-  'user_id' => '1',
-)
-2010-18-12 05:14:39; ERROR   ; array (
-)
-2010-18-12 10:22:49; ERROR   ; array (
-  'title' => 'Новая новость',
-  'id' => '',
-  'newsCategory' => '1',
-  'text' => 'прости меня господи за мои грехи',
-  'SID' => '1b86a84e7b661eaf069ec53f033c8c5d',
-  'user_id' => '1',
-)
-2010-18-12 10:22:49; ERROR   ; array (
-)
-2010-18-12 10:26:05; ERROR   ; array (
-  'title' => 'новая новость',
-  'id' => '',
-  'newsCategory' => '0',
-  'text' => 'ыаваыва
-ываыва
-ыва
-',
-  'SID' => '1b86a84e7b661eaf069ec53f033c8c5d',
-  'user_id' => '1',
-)
-2010-18-12 10:26:05; ERROR   ; array (
-)
-2010-18-12 10:26:41; ERROR   ; array (
-  'title' => 'test',
-  'id' => '',
-  'newsCategory' => '0',
-  'text' => 'ыаваыва
-ываыва
-ыва
-',
-  'SID' => '1b86a84e7b661eaf069ec53f033c8c5d',
-  'user_id' => '1',
-)
-2010-18-12 10:26:41; ERROR   ; array (
+2010-24-12 03:08:51; ERROR   ; array (
+  0 => 
+  array (
+    'sql' => 'UPDATE news SET
+	                    haveImage = 1
+						WHERE id=8 AND user_id = 1',
+    'time' => 0.000722,
+  ),
 )
