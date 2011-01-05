@@ -1,5 +1,4 @@
 <?php
-
 class Application {
 	
 	private $Request,
@@ -30,7 +29,9 @@ class Application {
 							  require_once('../lib/App/View.php' );
 
 							  require_once('../page/basePage.php' );
+//							  var_dump($this->filename);
 							  require_once( APP_PATH.'/'.$this->fileName );
+							  
 							  $this->Session = new Session();
 							  break;
 			case 'script' 	: $this->className = "{$this->pageName}Script";
@@ -46,13 +47,12 @@ class Application {
 		}
 		
 
-		try {						
-			$this->page = new $this->className( $this->Request, $this->Session);
+		try {			
+		    $class = new ReflectionClass( $this->className );
+		    $this->page = $class->newInstance( $this->Request, $this->Session );			
 		} catch ( Exception $e ) {
-//			$this->page = new NotFound ( $this->Request, $this->Session);
+			$this->page = new NotFound ( $this->Request, $this->Session);
 		}
-		
-		
 	}
 
 	public function run( $args=null ) {		
@@ -63,7 +63,7 @@ class Application {
 		$this->page->run();
 		
 		if ($this->mode != 'web') return;
-		
+				
 		$htmlBlocks = $this->page->finalize();
 
 		$this->blockonize();
@@ -84,9 +84,9 @@ class Application {
 			} 
 		}
 		echo $res;
-		echo '<!-- produce time=' .(  time() - $this->beginsTime + microtime() - $this->beginmTime) . ' in sec -->';		
+		echo '<font color=blue>produce time=' .(  time() - $this->beginsTime + microtime() - $this->beginmTime) . ' in sec </font>';		
 	}
-	
+		
 	/**
 	 * the processing blocks
 	 *
@@ -95,17 +95,22 @@ class Application {
 		if (is_array($this->page->getBlockNames() ))
 		foreach($this->page->getBlockNames() as $blockName  ) {
 			$classfile = LIBLK_PATH.'Block'. $blockName.'.php';
+//		echo $classfile;	
 			if ( file_exists( $classfile ) ) {
-				require( $classfile );
+				require_once( $classfile ); //die( $classfile );
 				$name = 'Block'.$blockName;
-				$blockClass = new $name($this->Request, $this->Session);
+				
+				$class = new ReflectionClass( $name );
+		        $blockClass = $class->newInstance( $this->Request, $this->Session );			
+//				var_dump($blockClass);
 				$blockClass->init();
 				$blockClass->run();
 				//echo "<font color=\"red\">". htmlspecialchars(var_export($blockClass->getHtml(), true)) ."</font>"; 
 				$this->bindBlockData[$blockName] = $blockClass->getHtml();
-				
+//				var_dump($blockName);
 			} else {
 				$filename = TPL_PATH.'block/'.$blockName.'.tpl';
+//				echo $filename;
 				if ( file_exists( $filename ))	 {
 					$this->bindBlockData[$blockName] = file_get_contents($filename);
 				} else {
@@ -118,28 +123,32 @@ class Application {
 	
 	
 	private function templonize( $htmlBlocks) {
-
 		
 		//$tpl = new blitz( TPL_PATH.'main.tpl' );
 		$tpl = new Template( TPL_PATH.'layout/'. $this->page->getLayoutName().'.tpl' );
 
-		//$htmlBlocks = $htmlBlocks ;
-		//var_dump($this->bindBlockData);
-		$tpl->set($this->bindBlockData + $this->page->getBindGlobal());
+		//var_dump( array_keys($this->page->getBindGlobal()) );
+		$out = $this->bindBlockData + $this->page->getBindGlobal();
+//
+//		foreach ( $out as $key => $item  ){
+//		  $tpl->block($key, $item);    
+//		}
 		
+        $tpl->set($this->bindBlockData);
+        
 		foreach ( $htmlBlocks as $key => $item  ){
+		
 			if (  is_array( $item ) ) {
-				foreach ( $item as $subitem )
+				foreach ( $item as $subitem ) {
+//				    echo "$key<br>\n";
 					$tpl->block($key  , $subitem );
+				}
 			} else {
 				$tpl->block($key  ,array( $key=> $item) );
 			
 			}
 		}		
-		
-		//var_dump( $this->bindBlockData);
-		
-		
+
 //		$tpl->iterate('/');
 		
 		return $tpl->parse();

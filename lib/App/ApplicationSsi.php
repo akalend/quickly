@@ -30,7 +30,8 @@ class ApplicationSsi {
 	    require_once( APP_PATH.'/'.$this->fileName );
 	    $this->Session = new Session;
 		try {						
-			$this->page = new $this->className( $this->Request, $this->Session);
+		    $class = new ReflectionClass( $this->className );
+		    $this->page = $class->newInstance( $this->Request, $this->Session );			
 		} catch ( Exception $e ) {
 //			$this->page = new NotFound ( $this->Request, $this->Session);
 		}
