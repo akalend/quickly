@@ -18,6 +18,9 @@ class NewsModel extends DbModel {
 	const SQL_DELETE_NEWS = "UPDATE news 
 	                    SET isPublish = 0
 						WHERE {{IF is_admin}}user_id = {{user_id}} AND {{END}}id = {{id}};";
+	const SQL_SET_HOT =  "UPDATE news 
+	                    SET isHot = 0
+						WHERE id = {{id}};";
 	
 	const SQL_ACTIVATE_NEWS = "UPDATE news 
 	                    SET isPublish = 1
@@ -31,7 +34,14 @@ class NewsModel extends DbModel {
 						FROM news 
 						WHERE id = {{id}}";
 	
+	const SQL_SELECT_NEW_NEWS = "SELECT *
+						FROM news 
+						WHERE isPublish = 0
+						ORDER BY date desc";
+	
 	const SQL_SELECT_CATEGORY = "SELECT id,title FROM newsCategory";
+	
+	const SQL_SELECT_MENU_CATEGORY = "SELECT id,title,shortname FROM newsCategory WHERE isMenu";
 	/*
  CREATE TABLE `news` (
   `id` int(11) NOT NULL auto_increment,
@@ -90,7 +100,7 @@ class NewsModel extends DbModel {
 	}
 	
 	public function setHot($news_id, $user_id, $isAdmin = 0) {
-	   // if (!$isAdmin) return; // TODO access only admin	   
+	   if (!$isAdmin) return; // TODO access only admin	   
 	   $data = array('id' => $news_id, 'user_id' => $user_id, 'is_admin' => $isAdmin);    
 	   $this->query(self::SQL_SETHOT_NEWS ,$data);
 	   return $this->getRowCount();
@@ -115,6 +125,23 @@ class NewsModel extends DbModel {
 	    return $this->data[0];	    
 	}
 
+	public function getNew() {
+	    $this->data = $this->exec( self::SQL_SELECT_NEW_NEWS);
+	    return array( 'news' => $this->data );	    
+	}
+	
+	public function getMenu() {
+        $conf = new Config();
+	    $mc = Mc::getInstance($conf->get('mc'));
+	    
+	    $data = $mc->get('newsMenu');
+	    if (!$data) {
+	       $data = $this->exec( self::SQL_SELECT_MENU_CATEGORY );
+	       $mc->set('newsMenu', $data);
+	    }	    	    
+	    return $data;
+	}
+	
 	public function getCategory($id = null) {
 	    $conf = new Config();
 	    $mc = Mc::getInstance($conf->get('mc'));
@@ -135,6 +162,7 @@ class NewsModel extends DbModel {
 	
 	public function getHot($part) {
 	    $this->data = $this->exec( self::SQL_SELECT );
+
 	    if (!$this->data)
 	       return array( 'news' => null );	    
 	    foreach ( $this->data as &$item ) {
