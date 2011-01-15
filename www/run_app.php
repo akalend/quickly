@@ -1,4 +1,12 @@
 <?
+
+error_reporting(E_ALL | E_STRICT);
+if (ini_get('display_errors') != 1) { // проверяет значение опции display_errors
+    ini_set('display_errors', 1); // включает вывод ошибок вместе с результатом работы скрипта
+};
+
+header('Content-type: text/html; charset=utf-8');
+
 //phpinfo();
 /**
  * ���� ������ ����������� �� WEB, 

@@ -96,4 +96,13 @@ class UserModel extends DbModel {
  		return sprintf('%x%x', crc32( $data['login'] . self::code_salt ), crc32(time()));
  	}
 
+	/**
+	 * Email exists
+	 *
+	 * @return true если существует
+	 */
+	public function testEmailExist ($email) {
+		echo "adsfsadas";
+	}
+
 }

@@ -14,4 +14,11 @@ $host_conf   = array (
         'upload' => '/tmp',
         
     ),
+    'ilja' => array (
+        'root' => '/home/www/tradebox/www/',
+        'news' => '/home/www/tradebox/static/news',
+        'static' => ' /home/www/tradebox/static/',
+        'upload' => '/tmp',
+        
+    ),
 );

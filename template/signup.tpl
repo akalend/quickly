@@ -1,3 +1,15 @@
+<style>
+table tr td {
+	vertical-align: top;
+	padding: 10px;
+}
+div.error {
+	font-size: 80%;
+	font-weight: bold;
+	color: red;
+}
+</style>
+
 <b>signup.tpl</b>
 
 <div>
@@ -5,34 +17,42 @@
 
 {{IF ok}}
 
-<form method="GET" action="/signup" >
-<div >
-    <div style="width: 630px;">
-        <div style="float: left; width: 120px; ">login</div>
-            <span><input type="text" name="login" value="{{login}}"> </span>
-            {{IF error_login}}<span style="color: red">{{error_login}}</span>{{END}}
-        </div>
-        <div>
-            <div style="float: left; width: 120px; ">password</div>
-            <span><input type="text" name="psw" value="{{psw}}"> </span>
-            {{IF error_psw}}<span style="color: red">{{error_psw}}</span>{{END}}
-        </div>
-        <div>
-            <div style="float: left; width: 120px; ">password</div>
-            <span><input type="text" name="psw2" value="{{psw2}}"> </span>
-            {{IF error_psw2}}<span style="color: red">{{error_psw2}}</span>{{END}}
-        </div>
-        <div>
-            <div style="float: left; width: 120px; ">email</div>
-            <span><input type="text" name="email" value="{{email}}"> </span>
-            {{IF error_email}}<span style="color: red">{{error_email}}</span>{{END}}
-        </div>
-    </div>
+<form method="POST" >
+<table cellpadding="0" cellspacing="0" border="1">
+	<tr>
+		<td>email</td><td>
+			<input type="text" name="email" value="{{email}}">
+			{{IF error_email}}<div class="error">{{error_email}}</div>{{END}}
+		</td>
+	</tr>
+	<tr>
+		<td>Пароль</td><td>
+			<input type="text" name="psw" value="{{psw}}">
+			{{IF error_psw}}<div class="error">{{error_psw}}</div>{{END}}
+		</td>
+	</tr>
+	<tr>
+		<td>Подтверждение пароля</td><td>
+			<input type="text" name="psw2" value="{{psw2}}">
+			{{IF error_psw2}}<div class="error">{{error_psw2}}</div>{{END}}
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			{{$captcha}}
+			{{IF error_captcha}}<div class="error">{{error_captcha}}</div>{{END}}
+		</td>
+	</tr>
+</table>
 
-    <div ><input type="submit"  value="register"> </div>
-   </div> 
+<div ><input type="submit"  value="register"> </div>
+
 </form>
+
+
 {{END ok}}
+
 {{UNLESS ok}}
     на указанный Вами email выслан код подтверждения<br>
     
@@ -42,14 +62,3 @@
 
 {{END}}
 </div>
-
-{{BEGIN mail}}<pre>
-<div style="color: blue;">example email:</div>
-Dear User,
-For activate your accaunt You must walk to link : <a href="http://{{server}}/activate/{{code}}">http://{{server}}/activate/{{code}}</a>
-Your  login <span style="color: blue">{{login}}</span>
-Your password <span style="color: blue">{{psw}}</span>
-the link will active one day/24 h 
-</pre>
-{{end}}
-

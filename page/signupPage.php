@@ -3,7 +3,9 @@
 class signUpPage extends basePage {
 
 	protected $URL='/signup';
-	protected  $template_name='signup';
+	protected $template_name='signup';
+	protected $layout = 'index';
+	
 	//protected $_Cached = true;
 	
 	/**
@@ -21,25 +23,29 @@ class signUpPage extends basePage {
 	 * ���������� ��� ������ ��������
 	 *
 	 */
-	public function run() {
-	    		    
+	public function run()
+	{
 	    $isOk = false;
-		if( $this->Request->hasVar('login') ) {
+		if( $this->Request->hasVar('email') )
+		{
 			$data = $this->Request->getVars() ;
 			$data['ip'] = ip2long($this->Request->getServer('REMOTE_ADDR'));
             
-			$this->Model = new UserModel();	
+			$this->Model = new UserModel();
+
 			if ( $this->checkError( $data )) { 
 		      	$isOk = true;
 			} else {    
 				
 				$res = $this->Model->add($data);
-				
+				// $isOk = !$res;
+				$isOk = false;
+
 				//@TODO this hack !!!
-				$data['server'] = 'localhost' ;//$this->Request->getServer('SERVER_NAME'); //
+				// $data['server'] = 'localhost' ;//$this->Request->getServer('SERVER_NAME'); //
 				
-				$this->View->bind('mail' , array($data));				
-				$isOk = !$res;
+				// $this->View->bind('mail' , array($data));	
+				
 			} 
 			
 		} else {
@@ -47,13 +53,12 @@ class signUpPage extends basePage {
 			$data = array( ''=>'');
 			$isOk = true;
 		}
-		
-		if (!$isOk) {
-		   $data['mail'] = Mail::format( $data, $this->template_name );
-
-		}
 		  
-		$data['ok'] = $isOk;  
+		$data['ok'] = $isOk;
+		// var_dump ($this->View);
+		
+		$data["captcha"] = CaptchaRecaptcha::getHTML();
+		
 		$this->View->bind('page' , $data);		
 	}
 	
@@ -63,21 +68,86 @@ class signUpPage extends basePage {
 	 * @param &array  $data - �������/�������� ������
 	 * @return true ���� ���� ������
 	 */
-	protected function checkError(&$data){
-			$is_err = false;
+	protected function checkError(&$data)
+	{
+			$is_err = true;
 			
 			// all validation functions must  return true if error exist.
-			$is_err = $is_err || $this->checkIsEmpty( $data, 'login' );
-			$is_err = $is_err || $this->checkIsEmpty( $data, 'psw' );
-			$is_err = $is_err || $this->checkIsEmpty( $data, 'psw2' );
-			$is_err = $is_err || $this->checkIsEmpty( $data, 'email' );
+			
+			/* Нет логина у нас
+			if ($this->checkIsEmpty( $data, 'login' )) {
+				$is_err = false;
+				$data["error_login"] = "Логин не введен";
+			}
+			*/
 
-			$is_err = $is_err || $this->checkEmail( $data, 'email' );
+			if ($this->checkIsEmpty( $data, 'email' )) {
+				$is_err = false;
+				$data["error_email"] = "E-mail не введен";
+			}
+
+			if ($this->checkIsEmpty( $data, 'psw' )) {
+				$is_err = false;
+				$data["error_psw"] = "Пароль не введен";
+			}
+
 			
-			$is_err = $is_err || $this->checkIsEQ( $data, 'psw' , 'psw2');
+			if ($this->checkIsEmpty( $data, 'psw2' )) {
+				$is_err = false;
+				$data["error_psw2"] = "Подтверждение пароля не введено";
+			}
+
+
+			// сравниваем пароли
+			$val = (
+				$data['psw'] != ""
+				&& $data['psw'] != $data['psw2']
+			);
+			if ($val) {
+				$is_err = false;
+				$data["error_psw2"] = "Введенные пароли не совпадают";
+			}
+
 			
-			$is_err = $is_err || $this->checkExistEmailAndLogin( $data );
-			 return $is_err;				
+			// капча
+			/*
+			$val = (
+				isset ($data["recaptcha_challenge_field"])
+				&& isset ($data["recaptcha_response_field"])
+			);
+			if ($val){
+				$val = CaptchaRecaptcha::validate(
+						$data["recaptcha_challenge_field"],
+						$data["recaptcha_response_field"]
+				);
+				if (!$val){
+					$is_err = false;
+					$data["error_captcha"] = "Изображение с картинки введено не верно";
+				}
+			}
+			else {
+				$is_err = false;
+				$data["error_captcha"] = "Изображение с картинки не введено";
+			}
+			*/
+
+			if ($data['email'] != "")
+			{
+				if ($this->checkEmail( $data, "email" )) {
+					$data["error_email"] = "E-mail адрес введен не корректно";
+				};
+				else {
+					
+				}
+			}
+
+			
+
+			// $is_err = $is_err || 
+			// $is_err = $is_err || $this->checkExistEmailAndLogin( $data );
+			
+			return !$is_err;
+
 	}
 	
 	protected function checkExistEmailAndLogin(&$data){
