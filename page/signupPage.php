@@ -131,14 +131,10 @@ class signUpPage extends basePage {
 			}
 			*/
 
-			if ($data['email'] != "")
-			{
+			if ($data['email'] != "") {
 				if ($this->checkEmail( $data, "email" )) {
 					$data["error_email"] = "E-mail адрес введен не корректно";
 				};
-				else {
-					
-				}
 			}
 
 			

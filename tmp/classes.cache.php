@@ -21,4 +21,5 @@ $classesCache = array (
   'BlockDebug' => 'lib/Block/BlockDebug.php',
   'ImageResizer' => 'lib/Image/ImageResizer.php',
   'ImageResize' => 'lib/Image/ImageResize.php',
+  'CaptchaRecaptcha' => 'lib/Captcha/CaptchaRecaptcha.php',
 );

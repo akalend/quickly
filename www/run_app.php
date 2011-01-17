@@ -14,8 +14,8 @@ header('Content-type: text/html; charset=utf-8');
  */
 include ('../inc.php');
 
-$name =  $_SERVER['page'];
-$ssi =  $_SERVER['ssi'];
+$name = isset($_SERVER['page'])? $_SERVER['page'] : 'error';
+$ssi =  isset($_SERVER['ssi']) ? $_SERVER['ssi']:false ;
 
 if (!$ssi)
     $ssi = isset($_GET['ssi']) ? $_GET['ssi']==1 : 0;
