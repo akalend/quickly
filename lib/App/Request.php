@@ -112,6 +112,18 @@ class Request {
 		
 	}
 	
+	/**
+	 * this method use only for nginx_upload_module
+	 *
+	 */
+	public function getImageFile( ) {
+	     return array(
+    	"name" => $this->Data['fileToUpload_name']  ,
+    	"type" => $this->Data['fileToUpload_content_type'] ,
+    	"tmp_name" => $this->Data['fileToUpload_path'] ,
+    	"error" => '',
+    	"size"=> $this->Data['fileToUpload_size'] );
+	}
 	
 /**
  

@@ -44,14 +44,7 @@
         <!--# include virtual="/login" --> 
     
 </div>
-<div style="block: none; padding-top: 100px;">
-в этом месте будет меню, возможно выпадающее<br>
-    <span><a href="#">горячие новости</a> </span>
-    <span><a href="#">новости региона</a> </span>
-    <span><a href="#">спорт</a> </span>
-    <span><a href="#">политика</a> </span>
-    <span><a href="#">шоппинг</a> </span>
-</div>
+<!--# include virtual="/newsmenu" --> 
 <div>
 
 <table width="1001px" border="1">

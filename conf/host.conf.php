@@ -4,7 +4,7 @@ $host_conf   = array (
         'static' => '/Users/akalend/projects/quickly/static/',
         'root' => ' /Users/akalend/projects/quickly/www',
         'news' => '/Users/akalend/projects/quickly/static/',
-        'upload' => '/Users/akalend/projects/quickly/tmp',        
+        'upload' => '/Users/akalend/tmp/image',        
         
     ),
     'tfn24' => array (

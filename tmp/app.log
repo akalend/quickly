@@ -1,40 +1,88 @@
-2010-24-12 03:06:08; ERROR   ; 
-2010-24-12 03:06:08; ERROR   ; array (
-  0 => 
+2011-17-01 12:38:35; ERROR   ; array (
+  'anonce' => 
   array (
-    'sql' => 'UPDATE news SET
-	                    haveImage = 1
-						WHERE id=8 AND user_id = 0',
-    'time' => 0.000482,
+    'width' => 180,
+    'height' => 121,
+  ),
+  'large' => 
+  array (
+    'width' => 320,
+    'height' => 240,
   ),
 )
-2010-24-12 03:07:26; ERROR   ; array (
-  'id' => '1',
-  'name' => '',
-  'login' => 'sasa',
-  'code' => '558fd037ee4b2673',
+2011-17-01 12:38:35; ERROR   ; news
+2011-17-01 12:38:35; ERROR   ; array (
+  'width' => 180,
+  'height' => 121,
 )
-2010-24-12 03:07:26; ERROR   ; array (
-  0 => 
+2011-17-01 12:38:35;         ; anonce/00/
+2011-17-01 12:38:35; ERROR   ; anonce
+2011-17-01 12:40:03; ERROR   ; array (
+  'anonce' => 
   array (
-    'sql' => 'UPDATE news SET
-	                    haveImage = 1
-						WHERE id=8 AND user_id = 0',
-    'time' => 0.000563,
+    'width' => 180,
+    'height' => 121,
+  ),
+  'large' => 
+  array (
+    'width' => 320,
+    'height' => 240,
   ),
 )
-2010-24-12 03:08:51; ERROR   ; array (
-  'id' => '1',
-  'name' => '',
-  'login' => 'sasa',
-  'code' => '558fd037ee4b2673',
+2011-17-01 12:40:03; ERROR   ; news
+2011-17-01 12:40:03; ERROR   ; array (
+  'width' => 180,
+  'height' => 121,
 )
-2010-24-12 03:08:51; ERROR   ; array (
-  0 => 
+2011-17-01 12:40:03;         ; anonce/00/
+2011-17-01 12:40:03; ERROR   ; anonce
+2011-17-01 12:46:35; ERROR   ; array (
+  'anonce' => 
   array (
-    'sql' => 'UPDATE news SET
-	                    haveImage = 1
-						WHERE id=8 AND user_id = 1',
-    'time' => 0.000722,
+    'width' => 180,
+    'height' => 121,
   ),
+  'large' => 
+  array (
+    'width' => 320,
+    'height' => 240,
+  ),
+)
+2011-17-01 12:46:35; ERROR   ; news
+2011-17-01 12:46:35; ERROR   ; array (
+  'width' => 180,
+  'height' => 121,
+)
+2011-17-01 12:46:35;         ; anonce/00/
+2011-17-01 12:46:35; ERROR   ; anonce
+2011-17-01 12:52:03;         ; anonce/00/
+2011-17-01 12:52:03; ERROR   ; anonce
+2011-17-01 12:52:13;         ; anonce/00/
+2011-17-01 12:52:13; ERROR   ; anonce
+2011-17-01 12:53:47;         ; anonce/00/
+2011-17-01 12:53:47; ERROR   ; anonce
+2011-17-01 12:54:01;         ; anonce/00/
+2011-17-01 12:54:01; ERROR   ; anonce
+2011-17-01 12:56:47; ERROR   ; /Users/akalend/tmp/image/0/0000000030
+2011-17-01 12:56:47;         ; anonce/00/
+2011-17-01 12:56:47; ERROR   ; anonce
+2011-17-01 01:30:23;         ; array (
+  'url' => NULL,
+  'upload' => NULL,
+  'db' => 0,
+)
+2011-17-01 01:38:40;         ; array (
+  'url' => 'large/00/00008.jpg',
+  'upload' => NULL,
+  'db' => 0,
+)
+2011-17-01 01:39:32;         ; array (
+  'url' => 'large/00/00008.jpg',
+  'upload' => NULL,
+  'db' => 0,
+)
+2011-17-01 01:39:59;         ; array (
+  'url' => 'large/00/00008.jpg',
+  'upload' => NULL,
+  'db' => 0,
 )

@@ -1,4 +1,7 @@
 <?php
+/**
+* need generate config
+*/
 
 $db_conf = array(
 	'host' 		=> 'localhost',
@@ -6,6 +9,8 @@ $db_conf = array(
 	'user'		=> 'root',
 	'password'	=>	'12345', 
 ); 
+
+
 
 $mc_conf = array(
 	'host'	=>	'localhost',

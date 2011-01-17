@@ -83,11 +83,14 @@ class newsPage extends basePage {
 	        $data['isLogining'] = $this->isLogining();
 	    } else {
 	        $res = $this->Model->get($this->args['id']);
+	        $res['img'] = ImageInfo::url($res['id'], 'large');
 //	    var_dump($res);
 	        $data = array('isLogining' => $this->isLogining(),
 	                  'id' =>    $res['id'],
 	                  'title' => $res['title'],
 	                  'text' =>  $res['text'],
+	                  'haveImage' => $res['haveImage'],
+	                  'img' => $res['img'],
 	                  'newsCategory' => $res['newsCategory'],);	        
 	    }
 	    $this->showPage($data);

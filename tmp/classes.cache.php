@@ -17,4 +17,8 @@ $classesCache = array (
   'indexPage' => 'page/indexPage.php',
   'newsPage' => 'page/newsPage.php',
   'userPage' => 'page/userPage.php',
+  'ImageInfo' => 'lib/Image/ImageInfo.php',
+  'BlockDebug' => 'lib/Block/BlockDebug.php',
+  'ImageResizer' => 'lib/Image/ImageResizer.php',
+  'ImageResize' => 'lib/Image/ImageResize.php',
 );

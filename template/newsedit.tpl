@@ -1,7 +1,6 @@
 <div>
 <div style="color: blue; font-family: Arial; font-size: 12pt">context:{{context}}</blockquote></div>
 
-
 {{BEGIN page}}
 
 {{IF isLogining}}
@@ -35,9 +34,9 @@
          <input type="hidden" name="id" id="newsId" value="{{id}}" />
         <button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Upload</button>
         </form>
-        {{IF hasImage}}
-        <img id="newsImg" />
-        {{END}}
+        
+        <img  style="display: {{if haveImage}}block{{end}}{{unless haveImage}}none{{end}};" id="newsImg" src="/img/{{img}}"/>
+        
     </div>  
 
 <script>
@@ -89,6 +88,7 @@ function ajaxFileUpload()
 						}
 					} else {
 					  $("#newsImg").attr('src','/img/'+data.url);
+					  $("#newsImg").css('display','block');
 					  //$.log($("#newsImg").attr('src'));
 					}
 				},

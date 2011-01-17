@@ -4,7 +4,7 @@
  * 
  * @author Cesar Rodrigo Bagatoli -> e-mail: crbdigo@gmail.com
  * @author ALEXANDRE KALENDAREV (refactoring) -> e-mail:   akalend@mail.ru
- * @version 1.0 em 15/05/2007.
+ * @version 1.1 
  *
  */
 class ImageResize {

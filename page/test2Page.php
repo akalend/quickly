@@ -44,29 +44,29 @@ class test2Page extends basePage {
 	        	 echo json_encode(array('error' => 'id news is not set')) ;		
 	        	 return;
 	        } 
-    	    $file = sprintf("news/%02d/%05d.gif",floor($id/1000),$id);
-
-    	    $res = null;
-    	    $path = dirname(IMAGE_PATH.$file);
-	        if (!file_exists($path)) 
-	           $res = mkdir($path);
-	            	
-            	        
-	               
-	        $res = @rename($this->Request->get('fileToUpload_path'), IMAGE_PATH.$file);
-            if (!$res) {
-	        	 echo json_encode(array('error' => 'rename uploaded file')) ;		
-	        	 return;
-	        }
-	        $User = $this->Session->get('webUser');
 	        
+	        if (!$contenetType = $this->Request->get('fileToUpload_size')) {
+	        	 echo json_encode(array('error' => 'size is zero')) ;		
+	        	 return;
+	        } 
+	        
+	        $ImageResazer = new ImageResizer( $this->Request->getImageFile());
+	        try {
+	        $ImageResazer->convert($id, 'news');
+	        } catch (Exception $e) {
+	            echo json_encode(array('error' => 'conversion error')) ;		
+	            return;
+	        }
+
+	        $User = $this->Session->get('webUser');
+	        	        
 	        $NM = new NewsModel();
-	        $res2 = $NM->setImage($id, $User['id']);
+	        $res = $NM->setImage($id, $User['id']);
 	        
 	        $arr = array();
-	        $arr['url'] = $file;    	    
-    	    $arr['upload'] = $res;
-    	    $arr['db'] = $res2;
+	        $arr['url'] = ImageInfo::url($id, 'large');    	    
+    	    $arr['db'] = $res;
+//{"url":null,"upload":null,"db":0}    	    
     		echo json_encode($arr) ;		
 		} else 
 			echo json_encode(array('error' => 'must be imgage')) ;		

@@ -121,7 +121,7 @@ class NewsModel extends DbModel {
 	}
 
 	public function get($id) {	    
-	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id) );
+	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id) );	    
 	    return $this->data[0];	    
 	}
 
@@ -136,7 +136,7 @@ class NewsModel extends DbModel {
 	    
 	    $data = $mc->get('newsMenu');
 	    if (!$data) {
-	       $data = $this->exec( self::SQL_SELECT_MENU_CATEGORY );
+	       $data = $this->exec( self::SQL_SELECT_MENU_CATEGORY );	       
 	       $mc->set('newsMenu', $data);
 	    }	    	    
 	    return $data;

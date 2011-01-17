@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" media="screen" href="/css/ajaxfileupload.css" />
 <script src="/js/lib/jquery.min.js" type="text/javascript" ></script>
-<script src="js/lib/jquery.form.js" type="text/javascript" ></script>
+<script src="/js/lib/jquery.form.js" type="text/javascript" ></script>
 <script src="/js/lib/jquery.debug.js" type="text/javascript"></script>
 <script src="/js/login.js" type="text/javascript"></script>
 

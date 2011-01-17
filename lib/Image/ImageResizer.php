@@ -17,20 +17,20 @@ class ImageResizer {
 
 	
 	/**
-	 * конвертирование и сохранениее в соответствии с конфигом
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 *
 	 */
-	public function convert( $id ) {
+	public function convert( $id , $configName = 'profile') {
 		
 		
 		$this->id = $id;
 		if ( !$this->imageFile ||  !$this->imageFile['size'] ) 
 			return false;
 			
-		$conf = new Config('profile', 'images');
+		$conf = new Config($configName, 'images');
 		$img_conf = $conf->getSection();
-		foreach ($img_conf as $type =>$image ){			
-			$this->resizeItem( $type , $image );			
+		foreach ($img_conf as $type => $image ){			
+		    $this->resizeItem( $type , $image );			
 		}
 			
 	}
@@ -45,7 +45,7 @@ class ImageResizer {
 		if ($this->imageFile['type'] == 'image/jpeg') 
 			return false;
 		
-		$data['error_'.$field] = 'не картинка';
+		$data['error_'.$field] = 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 			return true;	
 		
 	}
@@ -54,17 +54,21 @@ class ImageResizer {
 		
 		$typeOfImg = $this->imageFile['type'];
 		$name = $this->imageFile['tmp_name'];
-			    
-		$img = new ImageResize( $name);	
+
+		$imageFile = IMAGE_PATH.ImageInfo::url($this->id , $imageType);		
+		$imageDir = ImageInfo::dir($this->id , $imageType);
 		
-		$img->setNewImage( IMAGE_PATH. $imageType.'/'.$this->id .'.jpg' );
+		if(!file_exists(IMAGE_PATH.$imageDir))
+		  mkdir(IMAGE_PATH.$imageDir);
+		
+		$img = new ImageResize($name);	
+		
 		$img->setNewSize( $item['width'], $item['height']);
-		$img->setImageType('jpg');	  		
-		$img->make();
-		
+		$img->setImageType('jpg');	
+        $img->setNewImage($imageFile);
+		$img->make();		
 	}
 	
 //	calcResize::get($screen_width,$screen_height,$picture_width,$picture_height,$x,$y);
 
 } //end class
-?>
