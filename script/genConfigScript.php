@@ -26,7 +26,7 @@ class genConfigScript extends baseScript {
 
     $conf = new Config('host','conf');
     $hosts = $conf->getSection();
-
+ 
     if (!key_exists($hostname,$hosts))
         throw new Exception('The undefinit hostname, see conf/host.conf.php');
 //    $ngx = $cfg->get();
