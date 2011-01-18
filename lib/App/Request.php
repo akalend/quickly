@@ -118,11 +118,12 @@ class Request {
 	 */
 	public function getImageFile( ) {
 	     return array(
-    	"name" => $this->Data['fileToUpload_name']  ,
-    	"type" => $this->Data['fileToUpload_content_type'] ,
-    	"tmp_name" => $this->Data['fileToUpload_path'] ,
+    	"name" => array_key_exists('fileToUpload_name',$this->Data) ? $this->Data['fileToUpload_name'] : '' ,
+    	"type" => array_key_exists('fileToUpload_content_type',$this->Data) ? $this->Data['fileToUpload_content_type'] : '',
+    	"tmp_name" => array_key_exists('fileToUpload_path',$this->Data) ? $this->Data['fileToUpload_path'] : '',
     	"error" => '',
-    	"size"=> $this->Data['fileToUpload_size'] );
+    	"size"=> array_key_exists('fileToUpload_size',$this->Data) ? $this->Data['fileToUpload_size'] : 0,
+    	);
 	}
 	
 /**
