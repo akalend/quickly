@@ -225,7 +225,7 @@ abstract class DbModel {
 			
 			$this->sqlCache[] = $toSave;
 			//$this->rows = $this->db->affected_rows();
-			if (!is_object($res)) return true;			
+			if (!is_object($this->res)) return true;			
 	}
 	
 	/**
