@@ -4,25 +4,17 @@ class signUpPage extends basePage {
 
 	protected $URL='/signup';
 	protected $template_name='signup';
-	protected $layout = 'index';
+	protected $layout = 'content';
+	
+	protected $blockNames = array('login','menu');
 	
 	//protected $_Cached = true;
 	
-	/**
-	 * ����������� �������� signIn
-	 *
-	 * @param IRequest $Request - ������ �������
-	 * @param Session $Session  - ���������� ������
-	 */
 	public function __construct(Request $Request=null,Session $Session=null) {
 		parent::__construct($Request,$Session);;
 		
 	}
 	
-	/**
-	 * ���������� ��� ������ ��������
-	 *
-	 */
 	public function run()
 	{
 	    $isOk = false;

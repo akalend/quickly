@@ -11,6 +11,6 @@
 <div id="logoutDiv" style="display:{{IF showLoginForm}}none{{END}}{{UNLESS showLoginForm}}block{{END}}; height : 90px; border : 1px dotted; width : 190px; float: left;"> Добрый день <span id="userNameSpan" style="color: blue">{{name}}</span>
     <br><a href="#" onclick="signout()">выйти</a><br/>
     <br><a href="/news/me/" >мои новости</a>
-    <br><a href="/news/me/"  title="только для администарторов">все новые</a>
+    <br><a href="/news/allnew/"  title="только для администарторов">все новые</a>
 </div>
 {{END}}

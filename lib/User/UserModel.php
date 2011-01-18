@@ -93,7 +93,10 @@ class UserModel extends DbModel {
  	}
  	
  	private function getCode(array $data ) {
- 		return sprintf('%x%x', crc32( $data['login'] . self::code_salt ), crc32(time()));
+ 	    if (array_key_exists('login',$data))
+ 		     return sprintf('%x%x', crc32( $data['login'] . self::code_salt ), crc32(time()));
+ 		     
+ 		return sprintf('%x%x', crc32( rand(0,100) ), crc32(time())); 
  	}
 
 	/**

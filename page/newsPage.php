@@ -12,7 +12,9 @@ class newsPage extends basePage {
 	);
 
 	protected $template_name='hotnews';
-	protected $layout = 'main2';
+	protected $layout = 'content';
+	
+	protected $blockNames = array('login','menu');
 	
 	protected $URL = '/';
 	
@@ -42,10 +44,16 @@ class newsPage extends basePage {
 	    	    $this->setHot($this->args['id']);   		
 	            $this->showMy();   		
 	    		break;
+	    		
 	    	case 'edit':	    	    
 	    	    $this->edit($this->args['id']);   		
 	    		break;
 	    		
+            case 'onlynew':
+                 $this->showNew();
+                 break;
+                 
+ 	       case 'show':	    		 	       
 	    	default:
 	    		$this->showHot();
 	    }	    
@@ -122,5 +130,13 @@ class newsPage extends basePage {
 	    $this->template_name='mynews';
 	    $this->View->bind( 'page', $data);
 	}
+
+	private function showNew() {
+	    $data = $this->Model->getNew();
+	    $this->template_name='mynews';
+	    $this->View->bind( 'page', $data);
+	    $this->showHot();
+	}
+	
 	
 }
