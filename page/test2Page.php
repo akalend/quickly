@@ -64,8 +64,9 @@ class test2Page extends basePage {
 	        $res = $NM->setImage($id, $User['id']);
 	        
 	        $arr = array();
-	        $arr['url'] = ImageInfo::url($id, 'large');    	    
+	        $arr['url'] = ImageInfo::url($id, 'large').'?'.crc32(rand(0,1000));    	    
     	    $arr['db'] = $res;
+    	    //rand(0,1000);
 //{"url":null,"upload":null,"db":0}    	    
     		echo json_encode($arr) ;		
 		} else 

@@ -8,9 +8,35 @@
 <script src="/js/lib/jquery.rating.pack.js" type="text/javascript"></script>
 
 <script src="/js/login.js" type="text/javascript"></script>
+<script src="/js/autocomplete.js" type="text/javascript"></script>
 
 
 <title>24 часа Новостей о Товарах Финансах и Недвижимости на tfn24.ru</title>
+<style type="text/css">
+
+#autocomlite-block {
+	border: solid 1px red;
+	position: absolute;
+	top: 0;
+}
+
+.autocomplite-result-item {
+	/* border: solid 1px blue; */
+}
+
+.autocomplite-result-item a {
+	text-decoration: none;
+}
+
+.autocomplite-result-item a:hover {
+	text-decoration: underline;
+}
+
+.highlight {
+	font-weight: bold;
+}
+
+</style>
 
 </head>
 <body>

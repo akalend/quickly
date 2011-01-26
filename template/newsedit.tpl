@@ -19,6 +19,12 @@
         </select></div>
  
         
+
+        регион ....
+        <input type="text" name="search" id="input-search" style="position: absolute;  left: 150px" autocomplete="off"/>
+        <ul id="request-log"></ul>
+        
+        
         {{IF error_text}}<div style="color: red">не пустое</div>{{END}}        
         <textarea name="text" rows="20" style="width: 600px;">{{text}}</textarea>
 
@@ -41,6 +47,31 @@
 
 <script>
 
+autocomplete.sendrequest = function ()
+{
+//	$("#request-log").append ("<li>send request; query = "+autocomplete.last_request+"</li>");
+    var cityes = new Array();
+    $.post('/cityes', autocomplete.last_request, 
+        function(ob) {
+           var i;
+           $.log(ob.cityes);
+           for( city in ob.cityes) {
+               //cityes[i] = ob.cityes[i].name;
+               $.log(ob.cityes[city].name);
+               cityes[city] = ob.cityes[city].name;
+           };                      
+    }, 'json');
+ 
+	return cityes;
+}
+
+$(document).ready ( function () {
+	autocomplete.init("#input-search");
+});
+
+
+
+
 function showRequest(formData, jqForm, options) { 
     // formData is an array; here we use $.param to convert it to a string to display it 
     // but the form plugin does this for you automatically when it submits the data 
@@ -59,7 +90,7 @@ function showRequest(formData, jqForm, options) {
 
 function ajaxFileUpload()
 	{
-		//starting setting some animation when the ajax starts and completes
+		//starting setting some animation when the ajax starts and completes		
 		$("#loading")
 		.ajaxStart(function(){
 			$(this).show();
@@ -87,6 +118,8 @@ function ajaxFileUpload()
 						    alert(data.msg);
 						}
 					} else {
+					  $("#newsImg").attr('src','/img/0.gif');  
+					    
 					  $("#newsImg").attr('src','/img/'+data.url);
 					  $("#newsImg").css('display','block');
 					  //$.log($("#newsImg").attr('src'));
