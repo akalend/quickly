@@ -60,6 +60,9 @@ class NewsModel extends DbModel {
 	const SQL_UPDATE = "UPDATE news SET
 	                    title = '{{s(title)}}',
 	                    text = '{{s(text)}}', 
+	                    city_id = '{{i(city_id)}}', 
+	                    cityName = '{{s(city)}}',
+	                    tags = '{{s(tags)}}',
 	                    newsCategory = {{i(newsCategory)}}
 						WHERE id={{i(id)}}";
 	

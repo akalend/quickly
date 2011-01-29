@@ -81,6 +81,7 @@ class newsPage extends basePage {
 	private function edit() {
 	    if ($this->Request->hasVar()) {
 	        $data = $this->Request->getVars();
+	        
 	        $is_err = $this->checkFielsd($data);
 	        
 	        if(!$is_err) {
@@ -92,13 +93,18 @@ class newsPage extends basePage {
 	    } else {
 	        $res = $this->Model->get($this->args['id']);
 	        $res['img'] = ImageInfo::url($res['id'], 'large');
-//	    var_dump($res);
+	        
+//	    var_dump($res);	        'city_id' => $res['city_id'],
+//                              'cityName' => $res['search'],
 	        $data = array('isLogining' => $this->isLogining(),
 	                  'id' =>    $res['id'],
 	                  'title' => $res['title'],
 	                  'text' =>  $res['text'],
+                      'city_id' => $res['city_id'],
+                      'city' => $res['cityName'],
 	                  'haveImage' => $res['haveImage'],
 	                  'img' => $res['img'],
+	                  'tags' => $res['tags'],
 	                  'newsCategory' => $res['newsCategory'],);	        
 	    }
 	    $this->showPage($data);

@@ -31,7 +31,11 @@ class testScript extends baseScript {
 	 *
 	 */
 	public function run() {
-		$this->pagerTest();
+	    
+	    $s='песня года';
+	    $res = UtilConverter::transLiteral($s);
+	    echo "$res\n";
+		//$this->pagerTest();
 	}
 	
 	public function run2() {		

@@ -49,6 +49,11 @@ autocomplete.changefeeld = function ( )
 	autocomplete.draw ();
 }
 
+//autocomplete.setData = function (data) {
+//    $("city_id").attr("value", data);
+//    $.log(data);
+//}
+
 // функция отрисовки результатов
 autocomplete.draw = function (  )
 {
@@ -62,7 +67,7 @@ autocomplete.draw = function (  )
 	block_obj.html ("");
 	for ( key in autocomplete.items ) 
 	{
-		var item = autocomplete.items[key];
+		var item = autocomplete.items[key].name;
 		item = item.replace(autocomplete.last_request, '<span class="highlight">'+autocomplete.last_request+'</span>');
 
 		var item_html 	=  '<div id="autocomplite-result-item-'+key+'" class="autocomplite-result-item">';
@@ -91,10 +96,16 @@ autocomplete.draw = function (  )
 // выбираем запись
 autocomplete.selectitem = function ( key )
 {
-	$(autocomplete.object).val( $("#autocomplite-result-item-"+key).text() );
+	$.log( 'key=' + key);
+	$.log( 'city=' + autocomplete.items[key].name );
+	
+	$("#city_id").attr("value",autocomplete.items[key].id);
+	
+    $(autocomplete.object).val( $("#autocomplite-result-item-"+key).text() );
 	$(autocomplete.object).focus();
 	clearInterval (autocomplete.objectfocus);
 	autocomplete.changefeeld ();
+	
 	
 }
 

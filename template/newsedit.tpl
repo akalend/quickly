@@ -19,15 +19,19 @@
         </select></div>
  
         
+        
 
         регион ....
-        <input type="text" name="search" id="input-search" style="position: absolute;  left: 150px" autocomplete="off"/>
+        <input type="text"  value="{{city}}"  name="city" id="input-search" style="position: absolute;  left: 150px" autocomplete="off"/>
         <ul id="request-log"></ul>
         
+        <input type="hidden" title="hidden" name="city_id" id="city_id" value=""/>
         
         {{IF error_text}}<div style="color: red">не пустое</div>{{END}}        
         <textarea name="text" rows="20" style="width: 600px;">{{text}}</textarea>
-
+        <div>
+            метки : <input type="text"  value="{{tags}}" style="width: 400px;" name="tags" autocomplete="off"/>
+        </div>     
                 
         <div style="width: 600px;"><input type="submit" value="Save"></div>
     </form>
@@ -54,12 +58,13 @@ autocomplete.sendrequest = function ()
     $.post('/cityes', autocomplete.last_request, 
         function(ob) {
            var i;
-           $.log(ob.cityes);
+
            for( city in ob.cityes) {
                //cityes[i] = ob.cityes[i].name;
                $.log(ob.cityes[city].name);
-               cityes[city] = ob.cityes[city].name;
-           };                      
+               cityes[city] = ob.cityes[city];              
+           };  
+           
     }, 'json');
  
 	return cityes;

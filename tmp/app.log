@@ -86,3 +86,25 @@
   'upload' => NULL,
   'db' => 0,
 )
+2011-29-01 02:43:08; ERROR   ; array (
+  'title' => 'новость от матвиенко',
+  'id' => '8',
+  'newsCategory' => '2',
+  'city' => 'Вачи',
+  'city_id' => '632',
+  'text' => 'eeeerr
+tttyyyuuu
+uuuhhhttt',
+  'SID' => '3eef73ad7ac51e0f9b30c0fd31e5b19f',
+)
+2011-29-01 02:44:14; ERROR   ; array (
+  'title' => 'новость от матвиенко',
+  'id' => '8',
+  'newsCategory' => '2',
+  'city' => 'Вачи',
+  'city_id' => '632',
+  'text' => 'eeeerr
+tttyyyuuu
+uuuhhhttt',
+  'SID' => '3eef73ad7ac51e0f9b30c0fd31e5b19f',
+)

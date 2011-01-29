@@ -22,4 +22,5 @@ $classesCache = array (
   'ImageResizer' => 'lib/Image/ImageResizer.php',
   'ImageResize' => 'lib/Image/ImageResize.php',
   'CaptchaRecaptcha' => 'lib/Captcha/CaptchaRecaptcha.php',
+  'UtilConverter' => 'lib/Util/UtilConverter.php',
 );
