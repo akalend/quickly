@@ -126,8 +126,9 @@ abstract class DbModel {
 		if ( $this->isntCall ) {
 			$this->isntCall=false;
 			$this->db = new mysqli( $this->conf['host'], $this->conf['user'],$this->conf['password'], $this->conf['dbname']);
-			$this->db->query("SET NAMES 'cp1251'");
-			$this->encoding = 'UTF-8';
+			$this->db->query("SET NAMES 'utf8'");
+			
+			//$this->encoding = 'UTF-8';
 			if (mysqli_connect_error() ){
 				throw new Exception('Conection error '.mysqli_connect_error());
 			}
@@ -178,9 +179,12 @@ abstract class DbModel {
 			//$this->rows = $this->db->affected_rows();
 			if (!is_object($res)) return true;
 
+			$result = array();
 			while ($row = $res->fetch_assoc()) {
+//			    var_dump($row);
      		    if ($this->encoding) {
-     		         foreach ( $row as $key => $value) {     		             
+                    die('encoding');
+     		        foreach ( $row as $key => $value) {     		             
      		             if($value)
      		                $row[$key] = iconv('CP1251',$this->encoding,$value);
      		         }       

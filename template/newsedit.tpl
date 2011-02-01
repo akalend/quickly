@@ -35,9 +35,7 @@
                 
         <div style="width: 600px;"><input type="submit" value="Save"></div>
     </form>
-
-    
-
+ 
     <div style="padding-top:15px; width: 600px;"><span style="">загрузить картинку</span>
         <form name="form" action="" method="POST" enctype="multipart/form-data">
         <input id="fileToUpload" type="file" size="45" name="fileToUpload" class="input">

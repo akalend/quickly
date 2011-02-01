@@ -5,9 +5,9 @@
 
 $db_conf = array(
 	'host' 		=> 'localhost',
-	'dbname' 	=> 'tradebox_new',
+	'dbname' 	=> 'tfn',
 	'user'		=> 'root',
-	'password'	=>	'12345', 
+	'password'	=>	null, 
 ); 
 
 

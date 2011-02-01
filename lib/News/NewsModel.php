@@ -1,4 +1,4 @@
-<?
+<?php
 
 class NewsModel extends DbModel {
 	const ANONS_MIN = 512;
