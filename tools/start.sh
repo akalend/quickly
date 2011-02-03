@@ -4,7 +4,9 @@
 spawn-fcgi -p 9000  -n  -f   php-cgi &
 sudo /usr/local/nginx/sbin/nginx 
 
-sudo /opt/local/share/mysql5/mysql/mysql.server start
+/usr/local/mysql/bin/mysqld_safe user=akalend  & 
+
+#sudo /opt/local/share/mysql5/mysql/mysql.server start
 
 #sudo /Users/akalend/dist/mongodb-osx-i386-2010-02-19/mongo/mongod &
 

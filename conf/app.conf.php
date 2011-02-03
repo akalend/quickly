@@ -10,10 +10,6 @@ $db_conf = array(
 	'password'	=>	null, 
 ); 
 
-
-
-
-
 $mc_conf = array(
 	'host'	=>	'localhost',
 	'port'	=>	11211,
