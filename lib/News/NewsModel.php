@@ -99,6 +99,7 @@ class NewsModel extends DbModel {
 	public function activate($news_id, $user_id, $isAdmin = 0) {
 	   $data = array('id' => $news_id, 'user_id' => $user_id, 'is_admin' => $isAdmin);    
 	   $this->query(self::SQL_ACTIVATE_NEWS ,$data);
+	   
 	   return $this->getRowCount();
 	}
 	
@@ -106,6 +107,7 @@ class NewsModel extends DbModel {
 	   if (!$isAdmin) return; // TODO access only admin	   
 	   $data = array('id' => $news_id, 'user_id' => $user_id, 'is_admin' => $isAdmin);    
 	   $this->query(self::SQL_SETHOT_NEWS ,$data);
+	   
 	   return $this->getRowCount();
 	}
 	
@@ -118,8 +120,16 @@ class NewsModel extends DbModel {
 	    return $this->getId();
 	}
 	
+	private function createDataForImageTpl() {
+	    foreach($this->data as &$row) {	    
+	    	if ( array_key_exists('haveImage',$row) && $row['haveImage'])
+	            $row['image'] = ImageInfo::url($row['id'],'large');
+	    }	    
+	}
+	
 	public function getMy($webUser) {	    
 	    $this->data = $this->exec( self::SQL_SELECT_MYNEWS , $webUser );
+	    $this->createDataForImageTpl();
 	    return array( 'news' => $this->data );	    
 	}
 
@@ -168,11 +178,15 @@ class NewsModel extends DbModel {
 
 	    if (!$this->data)
 	       return array( 'news' => null );	    
+	       
 	    foreach ( $this->data as &$item ) {
 	       $this->cutText($item);
 	       $item['part']=$part;
+	       if ( array_key_exists('haveImage',$item) && $item['haveImage'])
+	            $item['image'] = ImageInfo::url($item['id'],'large');
+
 	    }
-	       	 
+	       
 	    return array( 'news' => $this->data );	    
 	}    
 

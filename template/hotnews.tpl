@@ -15,7 +15,7 @@ jQuery(document).ready(function(){
 
     <div style="border: doted 1 blue; width:400px; height:260px; float: left;">
     <h2 style="padding-top:3px; font-size:12pt"><a href="#">{{title}}</a></h2>	
-    <img src="img/3631.jpg" align="left">
+    <img src="img/{{image}}" align="left">
     <div style="font-family:Tahoma,Arial,Sans-serif; font-size:0.75em;">{{text}}</div>
 
     <input name="star{{part}}_{{id}}" type="radio" value="1" class="star"/>

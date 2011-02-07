@@ -17,11 +17,13 @@ class newsPage extends basePage {
 	protected $blockNames = array('login','menu');
 	
 	protected $URL = '/';
+	protected $id;
 	
 	public function __construct(Request $Request=null,Session $Session=null) {
 		parent::__construct($Request,$Session);
 		$this->Model = new NewsModel();
 		 $this->User = $this->Session->get('webUser');
+		 $this->id = $this->args['id'];
 	}
 	
 	public function run() {
@@ -132,9 +134,8 @@ class newsPage extends basePage {
 	    if(!$user)
 	       $this->redirectTo('newsPage');;
 
-	    $data = $this->Model->getMy($user);
 	    $this->template_name='mynews';
-	    $this->View->bind( 'page', $data);
+	    $this->View->bind( 'page', $this->Model->getMy($user));
 	}
 
 	private function showNew() {

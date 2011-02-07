@@ -8,7 +8,7 @@
         <h2 style="padding-top:3px; font-size:12pt"><a href="#">{{title}}</a></h2>	
         
         <div style="font-family:Tahoma,Arial,Sans-serif; font-size:0.75em; ">{{text}}</div>
-        {{IF haveImage}}<img src="/img/3631.jpg" align="left">{{END}}
+        {{IF haveImage}}<img src="/img/{{image}}" align="left">{{END}}
         
     <div style="margin-top: 3px; width:100px; float: left; background-color: silver;"><a href="/news/delete/{{id}}" title="удалять так же могут и модераторы">удалить</a></div>
     <div style="margin-top: 3px; margin-left: 8px; width:100px; float: left; background-color: silver;"><a href="/news/edit/{{id}}" title="редактировать так же могут и модераторы">редактировать</a></div>        
