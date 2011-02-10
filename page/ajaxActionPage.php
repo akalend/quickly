@@ -15,9 +15,21 @@ class ajaxActionPage extends ajaxPage {
 	   switch ($this->args['action']) {
 	       case 'newsadd': {$this->addNews(); break;}    
 	       case 'imgdel':  {$this->imgDel(); break;}    
+	       case 'addcomment':  {$this->addComment(); break;}    
 	       default: $this->noAction();
 	    } 
 	}
+	
+	private function addComment() {
+	    $User = $this->Session->get('webUser');
+	    $data = $this->Request->getVars();
+	    $data['user_id'] = $User['id'];
+	    $CM = new CommentModel();
+	    var_dump($data);
+	    $this->View['user_name'] = $User['name'] ? $User['name'] : $User['login'];
+	    $this->View['comment'] = $this->Request->get('comment');
+	    $this->View['id'] = $CM->add($data);
+	} 
 	
 	private function addNews() {
 	   if (!$this->Request->get('title'))    

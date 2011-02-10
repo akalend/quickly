@@ -52,9 +52,9 @@
 	<tr style="height: 300px;">
 		<td valign="top">		
 
-		<!--#include  virtual="/news/1/" -->
+		<!--#include  virtual="/news/part/1/" -->
 <!--# include file="banner2-800x90.tpl" -->		
-	<!--#include  virtual="/news/2/" -->
+	<!--#include  virtual="/news/part/2/" -->
 		</td>
 		<td valign="top" style="width: 240px;">html banner<br>
 			<!--# include file="banner.tpl" -->

@@ -134,8 +134,12 @@ class NewsModel extends DbModel {
 	}
 
 	public function get($id) {	    
-	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id) );	    
-	    return $this->data[0];	    
+	    $this->data = $this->exec( self::SQL_SELECT_BYID , array('id' =>$id) );	 	    
+	    
+	    if ( array_key_exists(0,$this->data) && $this->data[0]['haveImage'])
+	           $this->data[0]['img'] = ImageInfo::url($id,'large');
+	               
+	    return array_key_exists(0,$this->data) ? $this->data[0] : null;	    
 	}
 
 	public function getNew() {

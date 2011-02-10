@@ -22,11 +22,11 @@ class newsPage extends basePage {
 	public function __construct(Request $Request=null,Session $Session=null) {
 		parent::__construct($Request,$Session);
 		$this->Model = new NewsModel();
-		 $this->User = $this->Session->get('webUser');
-		 $this->id = $this->args['id'];
+		$this->User = $this->Session->get('webUser');
 	}
 	
 	public function run() {
+	    $this->id = $this->args['id'];
 	    //var_dump($this->args);	   
 	    switch ($this->args['action']) {
 	    	case 'my':
@@ -54,11 +54,26 @@ class newsPage extends basePage {
             case 'onlynew':
                  $this->showNew();
                  break;
-                 
- 	       case 'show':	    		 	       
+
+           case 'show':	   
+                 $this->showOneNews();
+                 break;
+    		 	       
 	    	default:
 	    		$this->showHot();
 	    }	    
+	}
+	
+	private function showOneNews() {	    
+	    $data = $this->Model->get($this->id);
+	    if (is_array($data)) {
+	        
+	        is_array($this->User) && $data['user_id'] = $this->User['id'];
+	        $data['isLogining'] = $this->isLogining();
+	    }
+	    
+	    $this->View->bind( 'page', $data);
+	    $this->template_name = 'newshow';
 	}
 	
 	private function deactivate($id) {	    

@@ -7,6 +7,8 @@ class loginPage extends basePage {
 	
     //protected $args = array( 'name' => null, 'paging' => null);
 	
+    const MONTH_IN_SEC = 2592000; // 24 * 3600 * 30
+    
 	protected $template_name='login';
 	protected $URL = '/login/';
 
@@ -15,7 +17,7 @@ class loginPage extends basePage {
 	}
 
 	public function run() {	   
-	   $time = time() + 30 * 24 * 3600;
+	   $time = time() + self::MONTH_IN_SEC ;
 	   
        if ( $res = $this->checkCookie($time)) {
            $res['showLoginForm'] = 0;

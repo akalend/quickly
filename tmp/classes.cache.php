@@ -23,4 +23,5 @@ $classesCache = array (
   'ImageResize' => 'lib/Image/ImageResize.php',
   'CaptchaRecaptcha' => 'lib/Captcha/CaptchaRecaptcha.php',
   'UtilConverter' => 'lib/Util/UtilConverter.php',
+  'CommentModel' => 'lib/Comment/CommentModel.php',
 );
