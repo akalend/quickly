@@ -6,6 +6,7 @@
 <script src="/js/lib/jquery.form.js" type="text/javascript" ></script>
 <script src="/js/lib/jquery.debug.js" type="text/javascript"></script>
 <script src="/js/login.js" type="text/javascript"></script>
+<script src="/js/<!--# echo var="$js"  default="no.js" --> " type="text/javascript"></script>
 
 
 <title>24 часа Новостей о Товарах Финансах и Недвижимости на tfn24.ru</title>

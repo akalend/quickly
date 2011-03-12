@@ -24,9 +24,10 @@ class ajaxActionPage extends ajaxPage {
 	    $User = $this->Session->get('webUser');
 	    $data = $this->Request->getVars();
 	    $data['user_id'] = $User['id'];
-	    $CM = new CommentModel();
-	    var_dump($data);
-	    $this->View['user_name'] = $User['name'] ? $User['name'] : $User['login'];
+	    $userName = $User['name'] ? $User['name'] : $User['login'];
+	    $data['user_name'] = $userName;
+	    $CM = new CommentModel();	    
+	    $this->View['user_name'] = $userName;
 	    $this->View['comment'] = $this->Request->get('comment');
 	    $this->View['id'] = $CM->add($data);
 	} 

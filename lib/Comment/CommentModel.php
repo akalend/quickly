@@ -2,21 +2,21 @@
 
 class CommentModel extends DbModel {
 		
-	const SQL_SELECT = "SELECT id,parent_id,h2_id,fullname, innername 
-					FROM category c
-					WHERE is_hidden=0
-					order by parent_id";
+	const SQL_SELECT_BY_NEWS = "SELECT id,text,user_id,date,user_name
+					FROM comments c
+					WHERE news_id = {{i(news_id)}}";
 
-	const SQL_INSERT = "INSERT INTO comments ( text,user_id,news_id ,date)
-					VALUES ('{{s(comment)}}', {{i(user_id)}}, {{i(news_id)}}, NOW())";
+	const SQL_INSERT = "INSERT INTO comments ( text,user_id,news_id ,date, user_name)
+					VALUES ('{{s(comment)}}', {{i(user_id)}}, {{i(news_id)}}, NOW(), '{{user_name}}')";
 	
 	public function add($data) { 			
 		$this->exec( self::SQL_INSERT , $data );
 		return $this->getId();
 	}
 	
-	public function getTitle() { 		
-		return $this->title;
+	public function get($news_id) { 		
+	    return $this->exec( self::SQL_SELECT_BY_NEWS , array('news_id' => $news_id) );
+		
 	}
 	
 

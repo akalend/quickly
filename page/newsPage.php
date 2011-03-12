@@ -72,6 +72,9 @@ class newsPage extends basePage {
 	        $data['isLogining'] = $this->isLogining();
 	    }
 	    
+	    $CM = new CommentModel();
+	    $data['comments'] = $CM->get($this->id);
+	    
 	    $this->View->bind( 'page', $data);
 	    $this->template_name = 'newshow';
 	}

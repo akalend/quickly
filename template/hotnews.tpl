@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
 </script>
 
     <div style="border: doted 1 blue; width:400px; height:260px; float: left;">
-    <h2 style="padding-top:3px; font-size:12pt"><a href="#">{{title}}</a></h2>	
+    <h2 style="padding-top:3px; font-size:12pt"><a href="/news/{{id}}">{{title}}</a></h2>	
     <img src="img/{{image}}" align="left">
     <div style="font-family:Tahoma,Arial,Sans-serif; font-size:0.75em;">{{text}}</div>
 

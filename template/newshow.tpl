@@ -14,8 +14,14 @@
 </div>        
 <h6>comments</h6>
 <div id="comments">
-{{comments}}
 
+{{BEGIN comments}}<div style="padding-top: 10px;">
+<div>{{text}}</div>
+<div>
+    <div style="color: silver; block: left">{{date}}</div><div style="color: blue; block: left">{{user_name}}</div>
+</div>
+</div>
+{{END}}
  
 
 
@@ -29,3 +35,6 @@
 
 {{END}}
 </div>
+<script>
+
+</script>
